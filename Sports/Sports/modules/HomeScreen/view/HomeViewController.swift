@@ -37,6 +37,7 @@ let sportsData = [
     
 override func viewDidLoad() {
         super.viewDidLoad()
+    self.navigationItem.hidesBackButton = true
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
 

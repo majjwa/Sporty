@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		134DA9822C749824007444FD /* FavTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134DA9812C749824007444FD /* FavTableViewCell.swift */; };
 		1371081A2C737B000055E531 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137108192C737B000055E531 /* HomeViewController.swift */; };
 		13DF22EF2C737C370021E788 /* FavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DF22EE2C737C370021E788 /* FavViewController.swift */; };
 		13DF22F12C73800F0021E788 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DF22F02C73800F0021E788 /* HomeCollectionViewCell.swift */; };
@@ -40,8 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		135A55712C7401EF000CFA00 /* customTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customTableViewCell.swift; sourceTree = "<group>"; };
-		135A55722C7401EF000CFA00 /* customTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = customTableViewCell.xib; sourceTree = "<group>"; };
+		134DA9812C749824007444FD /* FavTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavTableViewCell.swift; sourceTree = "<group>"; };
 		137108192C737B000055E531 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		13DF22EE2C737C370021E788 /* FavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavViewController.swift; sourceTree = "<group>"; };
 		13DF22F02C73800F0021E788 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -191,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				13DF22EE2C737C370021E788 /* FavViewController.swift */,
+				134DA9812C749824007444FD /* FavTableViewCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -224,8 +225,6 @@
 				137108112C737A970055E531 /* core */,
 				13E08A6F2C7377820016E497 /* Info.plist */,
 				13E08A672C7377800016E497 /* Sports.xcdatamodeld */,
-				135A55712C7401EF000CFA00 /* customTableViewCell.swift */,
-				135A55722C7401EF000CFA00 /* customTableViewCell.xib */,
 			);
 			path = Sports;
 			sourceTree = "<group>";
@@ -379,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13DF22F12C73800F0021E788 /* HomeCollectionViewCell.swift in Sources */,
+				134DA9822C749824007444FD /* FavTableViewCell.swift in Sources */,
 				13DF22EF2C737C370021E788 /* FavViewController.swift in Sources */,
 				1371081A2C737B000055E531 /* HomeViewController.swift in Sources */,
 				13E08A632C7377800016E497 /* ViewController.swift in Sources */,
