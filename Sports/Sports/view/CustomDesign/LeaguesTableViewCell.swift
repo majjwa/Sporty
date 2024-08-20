@@ -16,7 +16,6 @@ class LeaguesTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.contentView.layer.cornerRadius = 15
                 self.contentView.layer.masksToBounds = true
-      
                 LeaguesImg.layer.cornerRadius = LeaguesImg.frame.size.height / 2
                 LeaguesImg.clipsToBounds = true
             
@@ -28,7 +27,7 @@ class LeaguesTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+           
         // Configure the view for the selected state
     }
     

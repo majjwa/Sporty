@@ -25,7 +25,7 @@ class LeaguesViewController: UIViewController {
 extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10 // Replace with the actual number of favorite items
+        return 10
     }
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,8 +41,10 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
     }
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected Favorite \(indexPath.row + 1)")
+//        print("Selected Favorite \(indexPath.row + 1)")
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

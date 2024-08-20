@@ -38,6 +38,7 @@ let sportsData = [
 override func viewDidLoad() {
         super.viewDidLoad()
     self.navigationItem.hidesBackButton = true
+    
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
 
@@ -107,6 +108,8 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sport = sportsData[indexPath.row]
         print("\(sport.0) selected")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesViewController") as! LeaguesViewController
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
 }
