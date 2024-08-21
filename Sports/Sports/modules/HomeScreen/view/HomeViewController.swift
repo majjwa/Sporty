@@ -37,22 +37,16 @@ let sportsData = [
     
 override func viewDidLoad() {
         super.viewDidLoad()
-//    APIManager.shared.fetchLeagues(for: "football") { result in
+    
+//    APIManager.shared.fetchTeamDetails(teamId: 4) { result in
 //        switch result {
-//        case .success(let leaguesModel):
-//            print("Leagues: \(leaguesModel)")
+//        case .success(let events):
+//            print("Teams: \(events)")
 //        case .failure(let error):
-//            print("Error fetching leagues: \(error)")
+//            print("Error fetching upcoming Teams: \(error)")
 //        }
 //    }
-    APIManager.shared.fetchTeamDetails(teamId: 4) { result in
-        switch result {
-        case .success(let events):
-            print("Teams: \(events)")
-        case .failure(let error):
-            print("Error fetching upcoming Teams: \(error)")
-        }
-    }
+    
     APIManager.shared.fetchUpcomingEvents(leagueId: 204, fromDate: "2023-01-18", toDate: "2024-01-18") { result in
         switch result {
         case .success(let events):
