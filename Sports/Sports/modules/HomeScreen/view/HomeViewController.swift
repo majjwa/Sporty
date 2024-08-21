@@ -7,7 +7,11 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+protocol HomeProtocol {
+    func updateCellData()
+}
+
+class HomeViewController: UIViewController, HomeProtocol {
 
     @IBOutlet weak var homeCollectionView: UICollectionView!
     @IBOutlet weak var favImg: UIImageView!
@@ -16,83 +20,65 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var homeTabBar: UIView!
     @IBOutlet weak var tabBarView: UIView!
     
+    var presenter: HomePresenter?
 
-
-let sportsData = [
-        ("Football", "Football"),
-        ("Basketball", "basketball"),
-        ("Cricket", "cricket"),
-        ("Tennis", "Football"),
-        ("Tennis", "Football"),
-        ("Tennis", "Football"),
-        ("Tennis", "Football"),
-        ("Tennis", "Football"),
-        ("Tennis", "Football"),
-        ("Tennis", "Football"),
-        ("Tennis", "Football"),
-        ("Tennis", "Football"),
-        ("Tennis", "Football"),
-        ("Tennis", "Football"),
-    ]
-    
-override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-    
-//    APIManager.shared.fetchTeamDetails(teamId: 4) { result in
-//        switch result {
-//        case .success(let events):
-//            print("Teams: \(events)")
-//        case .failure(let error):
-//            print("Error fetching upcoming Teams: \(error)")
-//        }
-//    }
-    
-    APIManager.shared.fetchUpcomingEvents(leagueId: 204, fromDate: "2023-01-18", toDate: "2024-01-18") { result in
-        switch result {
-        case .success(let events):
-            print("Upcoming Events: \(events)")
-        case .failure(let error):
-            print("Error fetching upcoming events: \(error)")
-        }
-    }
-
-    self.navigationItem.hidesBackButton = true
-    
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
+        presenter = HomePresenter(homeView: self)
+        presenter?.fetchData()
+        homeDesign()
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .green
+        refreshControl.addTarget(self, action: #selector(refreshDataIndicator(_:)), for: .valueChanged)
+        homeCollectionView.refreshControl = refreshControl
 
-        
-        tabBarView.layer.cornerRadius = tabBarView.frame.height / 2
-        tabBarView.clipsToBounds = true
-        homeImg.tintColor = .green
+
     }
     
-override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         homeImg.tintColor = .green
         favImg.tintColor = .white
     }
 
-@IBAction func favTabBarTapped(_ sender: UIButton) {
+    @IBAction func favTabBarTapped(_ sender: UIButton) {
         homeImg.tintColor = .white
         favImg.tintColor = .green
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "FavViewController") as! FavViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
-}
+    func homeDesign(){
+        self.navigationItem.hidesBackButton = true
+        tabBarView.layer.cornerRadius = tabBarView.frame.height / 2
+        tabBarView.clipsToBounds = true
+        homeImg.tintColor = .green
+    }
+    func updateCellData() {
+        homeCollectionView.reloadData()
+        homeCollectionView.refreshControl?.endRefreshing()
 
+    }
+    @objc private func refreshDataIndicator(_ sender: UIRefreshControl) {
+       sender.beginRefreshing()
+        presenter?.fetchData()
+    }
+}
+// --------------------------------Extension---------------------------------------------------
 extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sportsData.count
+        return presenter?.sportsData.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath) as! HomeCollectionViewCell
-        let sport = sportsData[indexPath.row]
-        cell.homeLbl.text = sport.0
-        cell.homeImg.image = UIImage(named: sport.1)
         
+        if let sport = presenter?.sportsData[indexPath.row] {
+            cell.homeLbl.text = sport.title
+            cell.homeImg.image = UIImage(named: sport.image)
+        }
         
         cell.layer.cornerRadius = 20
         cell.layer.shadowOpacity = 0.5
@@ -102,7 +88,6 @@ extension HomeViewController: UICollectionViewDataSource {
         return cell
     }
 }
-
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
@@ -125,10 +110,10 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let sport = sportsData[indexPath.row]
-        print("\(sport.0) selected")
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesViewController") as! LeaguesViewController
-        self.navigationController?.pushViewController(vc, animated: true)
-        
+        if let sport = presenter?.sportsData[indexPath.row] {
+            print("\(sport.title) selected")
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesViewController") as! LeaguesViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

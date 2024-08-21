@@ -31,7 +31,7 @@ class APIManager {
             }
         }
     }
-
+}
     
     
     
@@ -55,7 +55,7 @@ class APIManager {
     
     
     
-    
+    /*
     func fetchLeagues(for sport: String, completion: @escaping (Result<LeaguesModel, Error>) -> Void) {
         let endpoint = "\(sport)/?met=Leagues&APIkey=\(apiKey)"
         request(endpoint, parameters: nil) { (result: Result<LeaguesModel, Error>) in
@@ -96,5 +96,5 @@ class APIManager {
 
     
     
-    
-}
+*/
+

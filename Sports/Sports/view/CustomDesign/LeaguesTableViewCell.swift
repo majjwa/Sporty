@@ -18,8 +18,6 @@ class LeaguesTableViewCell: UITableViewCell {
                 self.contentView.layer.masksToBounds = true
                 LeaguesImg.layer.cornerRadius = LeaguesImg.frame.size.height / 2
                 LeaguesImg.clipsToBounds = true
-            
-                
                 secImg.layer.cornerRadius = secImg.frame.size.height / 2
                 secImg.clipsToBounds = true
                 

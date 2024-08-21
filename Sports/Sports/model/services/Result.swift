@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum ResultEnum<Success, Failure: Error> {
     case success(Success)
     case failure(Failure)
