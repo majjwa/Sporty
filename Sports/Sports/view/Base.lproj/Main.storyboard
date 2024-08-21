@@ -112,8 +112,8 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="92"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHb-tc-rsW">
-                                                    <rect key="frame" x="43.333333333333329" y="107" width="41.333333333333329" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="39.333333333333329" y="107" width="49.333333333333329" height="23"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -233,7 +233,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Css-kS-I1r">
-                                <rect key="frame" x="0.0" y="135" width="393" height="634"/>
+                                <rect key="frame" x="0.0" y="153" width="393" height="616"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -260,7 +260,7 @@
                             <constraint firstItem="W28-Jq-Hdz" firstAttribute="trailing" secondItem="LrA-Bp-6gH" secondAttribute="trailing" id="GGP-eJ-Pbo"/>
                             <constraint firstItem="Qjy-r6-QER" firstAttribute="leading" secondItem="W28-Jq-Hdz" secondAttribute="leading" constant="55" id="M8T-lL-yW4"/>
                             <constraint firstItem="LrA-Bp-6gH" firstAttribute="leading" secondItem="W28-Jq-Hdz" secondAttribute="leading" id="RTf-9z-Xhu"/>
-                            <constraint firstItem="Css-kS-I1r" firstAttribute="top" secondItem="LrA-Bp-6gH" secondAttribute="bottom" constant="30" id="Vcn-Hz-fCZ"/>
+                            <constraint firstItem="Css-kS-I1r" firstAttribute="top" secondItem="LrA-Bp-6gH" secondAttribute="bottom" constant="48" id="Vcn-Hz-fCZ"/>
                             <constraint firstItem="W28-Jq-Hdz" firstAttribute="top" secondItem="LrA-Bp-6gH" secondAttribute="top" constant="66" id="a19-Xs-KkQ"/>
                             <constraint firstItem="Qjy-r6-QER" firstAttribute="top" secondItem="Css-kS-I1r" secondAttribute="bottom" id="akR-kb-IXt"/>
                             <constraint firstItem="Css-kS-I1r" firstAttribute="leading" secondItem="W28-Jq-Hdz" secondAttribute="leading" id="fI7-X9-56T"/>
@@ -268,7 +268,7 @@
                             <constraint firstItem="Qjy-r6-QER" firstAttribute="centerX" secondItem="LrA-Bp-6gH" secondAttribute="centerX" id="k92-is-OWj"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Qjy-r6-QER" secondAttribute="bottom" constant="-15" id="qnS-Uc-Qov"/>
                             <constraint firstItem="Qjy-r6-QER" firstAttribute="top" secondItem="aKv-Pm-bWd" secondAttribute="top" constant="769" id="sgo-Go-633"/>
-                            <constraint firstItem="Css-kS-I1r" firstAttribute="top" secondItem="LrA-Bp-6gH" secondAttribute="bottom" constant="30" id="zc1-B5-aKY"/>
+                            <constraint firstItem="Css-kS-I1r" firstAttribute="top" secondItem="LrA-Bp-6gH" secondAttribute="bottom" constant="48" id="zc1-B5-aKY"/>
                         </constraints>
                     </view>
                     <connections>
@@ -342,7 +342,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPE-Sm-7Wb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4356" y="-54"/>
+            <point key="canvasLocation" x="4282" y="-64"/>
+        </scene>
+        <!--Team Details View Controller-->
+        <scene sceneID="eKU-PI-aN0">
+            <objects>
+                <viewController storyboardIdentifier="TeamDetailsViewController" id="4rO-yW-jwN" customClass="TeamDetailsViewController" customModule="Sporty" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eeU-SO-f06">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="DXp-co-6JX"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tnI-vo-y2y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5015" y="-64"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ED4-5P-9jv">
@@ -379,7 +394,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="house.fill" catalog="system" width="32" height="32"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

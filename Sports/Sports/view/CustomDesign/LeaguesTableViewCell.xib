@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,15 +17,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mk0-Ak-FAR">
-                        <rect key="frame" x="20" y="14" width="83.333333333333343" height="83"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mk0-Ak-FAR">
+                        <rect key="frame" x="20" y="14" width="83.333333333333329" height="83"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="mk0-Ak-FAR" secondAttribute="height" id="qKI-TF-vXy"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="7ej-4k-nH9">
-                        <rect key="frame" x="108.33333333333333" y="45" width="42.666666666666671" height="21"/>
-                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <rect key="frame" x="111.33333333333331" y="44.666666666666664" width="45" height="21.666666666666664"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -41,10 +42,10 @@
                 </subviews>
                 <color key="backgroundColor" red="0.23038669810000001" green="0.23038669810000001" blue="0.23038669810000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstItem="DB8-wb-Rgh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CVN-Fd-ZSU"/>
                     <constraint firstItem="mk0-Ak-FAR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CcC-Ud-VEA"/>
                     <constraint firstAttribute="trailing" secondItem="DB8-wb-Rgh" secondAttribute="trailing" constant="5" id="Xmm-R0-p4X"/>
-                    <constraint firstItem="7ej-4k-nH9" firstAttribute="leading" secondItem="mk0-Ak-FAR" secondAttribute="trailing" constant="5" id="j1g-1S-vYn"/>
+                    <constraint firstItem="DB8-wb-Rgh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aEY-7Q-Ciw"/>
+                    <constraint firstItem="7ej-4k-nH9" firstAttribute="leading" secondItem="mk0-Ak-FAR" secondAttribute="trailing" constant="8" id="j1g-1S-vYn"/>
                     <constraint firstItem="mk0-Ak-FAR" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.75" id="qra-dc-iw4"/>
                     <constraint firstItem="7ej-4k-nH9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="t65-ju-Udf"/>
                 </constraints>
@@ -63,7 +64,7 @@
     <resources>
         <image name="play.fill" catalog="system" width="117" height="128"/>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

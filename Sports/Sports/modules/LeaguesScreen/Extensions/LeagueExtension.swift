@@ -20,7 +20,12 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeaguesTableViewCell", for: indexPath) as! LeaguesTableViewCell
-        
+        // Set selected background color to black
+        cell.selectedBackgroundView = {
+              let view = UIView()
+            view.backgroundColor = .black
+              return view
+          }()
         cell.backgroundColor = .black
         if let league = presenter?.leagues[indexPath.section] {
             cell.LeaguesName.text = league.leagueName
@@ -49,6 +54,11 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+        
+        
+        
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
