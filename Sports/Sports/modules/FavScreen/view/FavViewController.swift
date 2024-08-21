@@ -12,8 +12,8 @@ class FavViewController: UIViewController {
         
          favTableView.dataSource = self
          favTableView.delegate = self
-        tblDesgin()
-        favTableView.register(UINib(nibName: "LeaguesTableViewCell", bundle: nil), forCellReuseIdentifier: "LeaguesTableViewCell")
+         tblDesgin()
+         favTableView.register(UINib(nibName: "LeaguesTableViewCell", bundle: nil), forCellReuseIdentifier: "LeaguesTableViewCell")
       
     }
     
@@ -55,7 +55,6 @@ extension FavViewController: UITableViewDataSource, UITableViewDelegate {
         cell.backgroundColor = .black
         cell.LeaguesName.text = "League Name"
         cell.LeaguesImg.image = UIImage(named: "Football")
-        cell.secImg.image = UIImage(named: "youtube")
         
         return cell
     }

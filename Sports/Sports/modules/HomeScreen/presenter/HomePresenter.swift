@@ -11,18 +11,18 @@ class HomePresenter {
     func fetchData() {
     
         sportsData = [
-            HomeModel(image: "Football", title: "Football"),
-            HomeModel(image: "Basketball", title: "Basketball"),
-            HomeModel(image: "cricket", title: "Cricket"),
-            HomeModel(image: "tennis", title: "Tennis"),
-            HomeModel(image: "skating", title: "Skating"),
-            HomeModel(image: "running", title: "Running"),
-            HomeModel(image: "swimming", title: "Swimming"),
-            HomeModel(image: "Golf", title: "Golf"),
-            HomeModel(image: "sky", title: "Skydiving"),
-            HomeModel(image: "cycling", title: "Cycling"),
-            HomeModel(image: "box", title: "Boxing"),
-            HomeModel(image: "batball", title: "BatBall"),
+            HomeModel(image: "Football", title: "football"),
+            HomeModel(image: "Basketball", title: "basketball"),
+            HomeModel(image: "cricket", title: "cricket"),
+            HomeModel(image: "tennis", title: "tennis"),
+            HomeModel(image: "skating", title: "skating"),
+            HomeModel(image: "running", title: "running"),
+            HomeModel(image: "swimming", title: "swimming"),
+            HomeModel(image: "Golf", title: "golf"),
+            HomeModel(image: "sky", title: "skydiving"),
+            HomeModel(image: "cycling", title: "cycling"),
+            HomeModel(image: "box", title: "boxing"),
+            HomeModel(image: "batball", title: "batBall"),
             
         ]
         

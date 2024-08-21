@@ -1,25 +1,18 @@
 //
-//  Table&CollectionNibExt.swift
+//  Extensions.swift
 //  Sporty
 //
-//  Created by eng.omar on 21/08/2024.
+//  Created by marwa maky on 21/08/2024.
 //
-
-
 import Foundation
 import UIKit
 
 extension  UITableView {
     
     func RegisterNib<cell : UITableViewCell>(cell : cell.Type){
-        
-        
         let nibName = String(describing : cell.self)
-        
         self.register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: nibName)
-        
-        
-    }
+        }
     
     
     func dequeue<cell : UITableViewCell>() -> cell{

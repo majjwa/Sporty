@@ -9,21 +9,19 @@ import UIKit
 
 class LeaguesTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var secImg: UIImageView!
     @IBOutlet weak var LeaguesImg: UIImageView!
     @IBOutlet weak var LeaguesName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.layer.cornerRadius = 15
                 self.contentView.layer.masksToBounds = true
- 
+        
                 
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
            
-        // Configure the view for the selected state
     }
     @IBAction func btnGoUTube(_ sender: Any) {
         DispatchQueue.main.async {

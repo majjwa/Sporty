@@ -10,63 +10,27 @@ protocol LeaguesProtocol{
     func updateTable()
 }
 class LeaguesViewController: UIViewController, LeaguesProtocol {
-    func updateTable() {
-        
-    }
-    
 
     @IBOutlet weak var LeaguesTbl: UITableView!
+
+    var presenter: LeaguesPresenter?
+    var sportType: String? 
+
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        LeaguesTbl.register(UINib(nibName: "LeaguesTableViewCell", bundle: nil), forCellReuseIdentifier: "LeaguesTableViewCell")
+
+        presenter = LeaguesPresenter(leaguesView: self)
         LeaguesTbl.dataSource = self
         LeaguesTbl.delegate = self
-        LeaguesTbl.RegisterNib(cell: LeaguesTableViewCell.self)
-        LeaguesTbl.backgroundColor = .black
+        LeaguesTbl.register(UINib(nibName: "LeaguesTableViewCell", bundle: nil), forCellReuseIdentifier: "LeaguesTableViewCell")
         
-        
+        if let sportType = sportType {
+            presenter?.fetchLeagues(for: sportType) 
+        }
     }
-
-}
-// --------------------------------Extension---------------------------------------------------
-
-extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LeaguesTableViewCell", for: indexPath) as! LeaguesTableViewCell
-        cell.backgroundColor = .black
-        cell.LeaguesName.text = "League Name"
-        cell.LeaguesImg.image = UIImage(named: "Football")
-        cell.LeaguesImg.layer.cornerRadius = 10
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
-    }
-
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView()
-        footerView.backgroundColor = .clear
-        return footerView
+    
+    func updateTable() {
+        LeaguesTbl.reloadData()
     }
 }
+
