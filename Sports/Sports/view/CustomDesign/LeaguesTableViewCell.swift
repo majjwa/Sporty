@@ -16,10 +16,7 @@ class LeaguesTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.contentView.layer.cornerRadius = 15
                 self.contentView.layer.masksToBounds = true
-                LeaguesImg.layer.cornerRadius = LeaguesImg.frame.size.height / 2
-                LeaguesImg.clipsToBounds = true
-                secImg.layer.cornerRadius = secImg.frame.size.height / 2
-                secImg.clipsToBounds = true
+ 
                 
     }
 
@@ -28,5 +25,17 @@ class LeaguesTableViewCell: UITableViewCell {
            
         // Configure the view for the selected state
     }
+    @IBAction func btnGoUTube(_ sender: Any) {
+        DispatchQueue.main.async {
+                self.openYouTube()
+            }
+    }
+    func openYouTube() {
+//            var str = LeaguesName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        var str = "UEFAEuropaLeague"
+            str = str.replacingOccurrences(of: " ", with: "")
+            print("\(str)")
+            UIApplication.shared.open(URL(string: ("https://www.youtube.com/@\(str)"))!, options: [:], completionHandler: nil)
+        }
     
 }

@@ -9,46 +9,61 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="111" id="KGk-i7-Jjw" customClass="LeaguesTableViewCell" customModule="Sporty" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeaguesTableViewCell" rowHeight="111" id="KGk-i7-Jjw" customClass="LeaguesTableViewCell" customModule="Sporty" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mk0-Ak-FAR">
-                        <rect key="frame" x="2" y="5" width="105" height="101"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mk0-Ak-FAR">
+                        <rect key="frame" x="20" y="14" width="83.333333333333343" height="83"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="mk0-Ak-FAR" secondAttribute="height" id="qKI-TF-vXy"/>
+                        </constraints>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mjG-rb-rmJ">
-                        <rect key="frame" x="225" y="9" width="93" height="84"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ej-4k-nH9">
-                        <rect key="frame" x="115" y="42" width="84.333333333333314" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="7ej-4k-nH9">
+                        <rect key="frame" x="108.33333333333333" y="45" width="42.666666666666671" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DB8-wb-Rgh">
+                        <rect key="frame" x="271.66666666666669" y="38.333333333333329" width="43.333333333333314" height="34.333333333333329"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="play.fill" catalog="system">
+                            <color key="baseForegroundColor" systemColor="systemGreenColor"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="btnGoUTube:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="965-wF-WOs"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" red="0.23038669810000001" green="0.23038669810000001" blue="0.23038669810000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="DB8-wb-Rgh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CVN-Fd-ZSU"/>
+                    <constraint firstItem="mk0-Ak-FAR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CcC-Ud-VEA"/>
+                    <constraint firstAttribute="trailing" secondItem="DB8-wb-Rgh" secondAttribute="trailing" constant="5" id="Xmm-R0-p4X"/>
+                    <constraint firstItem="7ej-4k-nH9" firstAttribute="leading" secondItem="mk0-Ak-FAR" secondAttribute="trailing" constant="5" id="j1g-1S-vYn"/>
+                    <constraint firstItem="mk0-Ak-FAR" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.75" id="qra-dc-iw4"/>
+                    <constraint firstItem="7ej-4k-nH9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="t65-ju-Udf"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <constraints>
-                <constraint firstItem="mk0-Ak-FAR" firstAttribute="leading" secondItem="njF-e1-oar" secondAttribute="leading" constant="2" id="0Gn-v4-YW4"/>
-                <constraint firstItem="njF-e1-oar" firstAttribute="bottom" secondItem="mjG-rb-rmJ" secondAttribute="bottom" constant="18" id="6Ft-ag-xib"/>
-                <constraint firstItem="mjG-rb-rmJ" firstAttribute="leading" secondItem="njF-e1-oar" secondAttribute="leading" constant="225" id="7zQ-rM-wGD"/>
-                <constraint firstItem="njF-e1-oar" firstAttribute="trailing" secondItem="mk0-Ak-FAR" secondAttribute="trailing" constant="213" id="Nwl-U5-1zG"/>
-                <constraint firstItem="njF-e1-oar" firstAttribute="trailing" secondItem="mjG-rb-rmJ" secondAttribute="trailing" constant="2" id="S5Y-a3-1xA"/>
-                <constraint firstItem="njF-e1-oar" firstAttribute="bottom" secondItem="mk0-Ak-FAR" secondAttribute="bottom" constant="5" id="W30-Vh-xvm"/>
-                <constraint firstItem="mjG-rb-rmJ" firstAttribute="top" secondItem="njF-e1-oar" secondAttribute="top" constant="9" id="ZCz-Mo-wBh"/>
-                <constraint firstItem="mk0-Ak-FAR" firstAttribute="top" secondItem="njF-e1-oar" secondAttribute="top" constant="5" id="ufh-Ha-T93"/>
+                <constraint firstItem="mk0-Ak-FAR" firstAttribute="leading" secondItem="njF-e1-oar" secondAttribute="leading" constant="20" id="0Gn-v4-YW4"/>
             </constraints>
             <connections>
                 <outlet property="LeaguesImg" destination="mk0-Ak-FAR" id="GSI-bV-k6a"/>
                 <outlet property="LeaguesName" destination="7ej-4k-nH9" id="J2H-LR-Csr"/>
-                <outlet property="secImg" destination="mjG-rb-rmJ" id="KfZ-YP-RgD"/>
             </connections>
             <point key="canvasLocation" x="491.60305343511448" y="-5.2816901408450709"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="play.fill" catalog="system" width="117" height="128"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

@@ -6,8 +6,14 @@
 //
 
 import UIKit
-
-class LeaguesViewController: UIViewController {
+protocol LeaguesProtocol{
+    func updateTable()
+}
+class LeaguesViewController: UIViewController, LeaguesProtocol {
+    func updateTable() {
+        
+    }
+    
 
     @IBOutlet weak var LeaguesTbl: UITableView!
     override func viewDidLoad() {
@@ -16,7 +22,10 @@ class LeaguesViewController: UIViewController {
         LeaguesTbl.register(UINib(nibName: "LeaguesTableViewCell", bundle: nil), forCellReuseIdentifier: "LeaguesTableViewCell")
         LeaguesTbl.dataSource = self
         LeaguesTbl.delegate = self
-        LeaguesTbl.tableFooterView = UIView()
+        LeaguesTbl.RegisterNib(cell: LeaguesTableViewCell.self)
+        LeaguesTbl.backgroundColor = .black
+        
+        
     }
 
 }
@@ -37,13 +46,14 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
         cell.backgroundColor = .black
         cell.LeaguesName.text = "League Name"
         cell.LeaguesImg.image = UIImage(named: "Football")
-        cell.secImg.image = UIImage(named: "youtube")
-
+        cell.LeaguesImg.layer.cornerRadius = 10
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
