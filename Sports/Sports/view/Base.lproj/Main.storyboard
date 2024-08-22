@@ -280,7 +280,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qdx-kL-35B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2829.770992366412" y="-64.08450704225352"/>
+            <point key="canvasLocation" x="2856" y="-64"/>
         </scene>
         <!--Leagues-->
         <scene sceneID="dGZ-fp-2Hp">
@@ -351,13 +351,70 @@
                     <view key="view" contentMode="scaleToFill" id="eeU-SO-f06">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSf-I2-xe0">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
+                                <textAttributes key="largeTitleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Team Details" id="S1i-Fq-pv4">
+                                        <barButtonItem key="leftBarButtonItem" image="arrowshape.backward.circle.fill" catalog="system" id="Qlh-zc-axc">
+                                            <color key="tintColor" systemColor="systemGreenColor"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dTG-27-qcR">
+                                <rect key="frame" x="0.0" y="103" width="393" height="255"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eFb-b7-J3Z">
+                                <rect key="frame" x="0.0" y="358" width="393" height="494"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7a-ir-yz2">
+                                <rect key="frame" x="59" y="155" width="180" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="DXp-co-6JX"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dSf-I2-xe0" firstAttribute="top" secondItem="eeU-SO-f06" secondAttribute="topMargin" id="1nr-BZ-qCL"/>
+                            <constraint firstItem="dTG-27-qcR" firstAttribute="top" secondItem="dSf-I2-xe0" secondAttribute="top" constant="44" id="FPd-4j-NnQ"/>
+                            <constraint firstItem="DXp-co-6JX" firstAttribute="trailing" secondItem="dTG-27-qcR" secondAttribute="trailing" id="NyP-MA-fD4"/>
+                            <constraint firstItem="DXp-co-6JX" firstAttribute="trailing" secondItem="eFb-b7-J3Z" secondAttribute="trailing" id="VS3-qg-K53"/>
+                            <constraint firstItem="dTG-27-qcR" firstAttribute="leading" secondItem="DXp-co-6JX" secondAttribute="leading" id="fyr-YW-3iY"/>
+                            <constraint firstItem="eFb-b7-J3Z" firstAttribute="leading" secondItem="DXp-co-6JX" secondAttribute="leading" id="iiC-N3-lSi"/>
+                            <constraint firstItem="eFb-b7-J3Z" firstAttribute="firstBaseline" secondItem="dTG-27-qcR" secondAttribute="baseline" id="kdk-fb-QK6"/>
+                            <constraint firstItem="DXp-co-6JX" firstAttribute="bottom" secondItem="dTG-27-qcR" secondAttribute="bottom" constant="460" id="ncb-zE-Fpw"/>
+                            <constraint firstItem="DXp-co-6JX" firstAttribute="trailing" secondItem="dSf-I2-xe0" secondAttribute="trailing" id="p1V-lp-dPq"/>
+                            <constraint firstAttribute="bottom" secondItem="eFb-b7-J3Z" secondAttribute="bottom" id="s9w-8d-kyS"/>
+                            <constraint firstItem="dSf-I2-xe0" firstAttribute="leading" secondItem="DXp-co-6JX" secondAttribute="leading" id="uB9-oq-neh"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="TeamImg" destination="dTG-27-qcR" id="6Gc-Om-2Sj"/>
+                        <outlet property="lbl1" destination="h7a-ir-yz2" id="K7o-bM-WPq"/>
+                        <outlet property="teamTbl" destination="eFb-b7-J3Z" id="WnS-yG-WAq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnI-vo-y2y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5015" y="-64"/>
+            <point key="canvasLocation" x="4996.1832061068699" y="-64.08450704225352"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ED4-5P-9jv">
@@ -394,10 +451,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="house.fill" catalog="system" width="32" height="32"/>
+        <image name="arrowshape.backward.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
