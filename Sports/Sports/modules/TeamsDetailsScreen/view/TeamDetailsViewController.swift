@@ -9,6 +9,7 @@ import UIKit
 
 class TeamDetailsViewController: UIViewController {
 
+    
     @IBOutlet weak var lbl1: UILabel!
     @IBOutlet weak var teamTbl: UITableView!
     @IBOutlet weak var TeamImg: UIImageView!
@@ -18,7 +19,9 @@ class TeamDetailsViewController: UIViewController {
         
     }
     
+   
 
+    
   
 
 }

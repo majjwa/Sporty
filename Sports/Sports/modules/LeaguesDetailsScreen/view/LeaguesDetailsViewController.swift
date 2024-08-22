@@ -10,19 +10,23 @@ protocol LeaguesDetailsProtocol{
     func updateCollectionView()
 }
 class LeaguesDetailsViewController: UIViewController,LeaguesDetailsProtocol {
-    func updateCollectionView() {
+    
+    @IBOutlet weak var DetailsCollectionView: UICollectionView!
+    @IBOutlet weak var favBtn: UIButton!
+    
+func updateCollectionView() {
         
     }
     
-  
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
        
     }
+  
     
-
+    @IBAction func favBtn(_ sender: Any) {
+    }
+    
 
 }
