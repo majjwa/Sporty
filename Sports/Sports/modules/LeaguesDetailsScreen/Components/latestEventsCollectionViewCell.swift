@@ -9,4 +9,9 @@ import UIKit
 
 class latestEventsCollectionViewCell: UICollectionViewCell {
     
+    
+    
+    
+    
+    
 }
