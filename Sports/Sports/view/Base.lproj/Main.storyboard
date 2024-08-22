@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dfi-AM-AWP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ppm-9S-hXE">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
@@ -375,8 +375,19 @@
                                     <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </textAttributes>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7x-uQ-3eO">
+                                <rect key="frame" x="16" y="64" width="50" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.backward.circle" catalog="system">
+                                    <color key="baseForegroundColor" systemColor="systemGreenColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="Dismiss:" destination="dfi-AM-AWP" eventType="touchUpInside" id="pyj-5b-jJb"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6G-hr-zvV">
-                                <rect key="frame" x="315" y="59" width="51" height="35"/>
+                                <rect key="frame" x="302" y="59" width="75" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
@@ -389,6 +400,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eB0-iv-1qD"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="eB0-iv-1qD" firstAttribute="trailing" secondItem="Bww-na-Uas" secondAttribute="trailing" id="9f5-ty-rh4"/>
                             <constraint firstItem="Bww-na-Uas" firstAttribute="leading" secondItem="eB0-iv-1qD" secondAttribute="leading" id="NAQ-1t-CxH"/>
@@ -406,7 +418,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPE-Sm-7Wb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4645" y="-101"/>
+            <point key="canvasLocation" x="4375" y="-64"/>
         </scene>
         <!--Team Details View Controller-->
         <scene sceneID="eKU-PI-aN0">
@@ -418,27 +430,20 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSf-I2-xe0">
                                 <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </textAttributes>
                                 <textAttributes key="largeTitleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="textShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </textAttributes>
-                                <items>
-                                    <navigationItem title="Team Details" id="S1i-Fq-pv4">
-                                        <barButtonItem key="leftBarButtonItem" image="arrowshape.backward.circle.fill" catalog="system" id="Qlh-zc-axc">
-                                            <color key="tintColor" systemColor="systemGreenColor"/>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
                             </navigationBar>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dTG-27-qcR">
-                                <rect key="frame" x="0.0" y="103" width="393" height="255"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Ball" translatesAutoresizingMaskIntoConstraints="NO" id="dTG-27-qcR">
+                                <rect key="frame" x="0.0" y="108" width="393" height="250"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eFb-b7-J3Z">
                                 <rect key="frame" x="0.0" y="358" width="393" height="494"/>
@@ -447,19 +452,37 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7a-ir-yz2">
-                                <rect key="frame" x="59" y="155" width="180" height="21"/>
+                                <rect key="frame" x="144" y="251" width="180" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PfH-N2-0Xr">
+                                <rect key="frame" x="103.66666666666669" y="59.666666666666657" width="186" height="43"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAX-T7-Bxo">
+                                <rect key="frame" x="16" y="68" width="50" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.backward.circle" catalog="system">
+                                    <color key="baseForegroundColor" systemColor="systemGreenColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="dismiss:" destination="4rO-yW-jwN" eventType="touchUpInside" id="bum-Yr-9eN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DXp-co-6JX"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="dSf-I2-xe0" firstAttribute="top" secondItem="eeU-SO-f06" secondAttribute="topMargin" id="1nr-BZ-qCL"/>
-                            <constraint firstItem="dTG-27-qcR" firstAttribute="top" secondItem="dSf-I2-xe0" secondAttribute="top" constant="44" id="FPd-4j-NnQ"/>
-                            <constraint firstItem="DXp-co-6JX" firstAttribute="trailing" secondItem="dTG-27-qcR" secondAttribute="trailing" id="NyP-MA-fD4"/>
+                            <constraint firstItem="PfH-N2-0Xr" firstAttribute="centerY" secondItem="dSf-I2-xe0" secondAttribute="centerY" id="HuD-gd-cbe"/>
+                            <constraint firstAttribute="trailing" secondItem="dTG-27-qcR" secondAttribute="trailing" id="NyP-MA-fD4"/>
                             <constraint firstItem="DXp-co-6JX" firstAttribute="trailing" secondItem="eFb-b7-J3Z" secondAttribute="trailing" id="VS3-qg-K53"/>
                             <constraint firstItem="dTG-27-qcR" firstAttribute="leading" secondItem="DXp-co-6JX" secondAttribute="leading" id="fyr-YW-3iY"/>
                             <constraint firstItem="eFb-b7-J3Z" firstAttribute="leading" secondItem="DXp-co-6JX" secondAttribute="leading" id="iiC-N3-lSi"/>
@@ -467,7 +490,9 @@
                             <constraint firstItem="DXp-co-6JX" firstAttribute="bottom" secondItem="dTG-27-qcR" secondAttribute="bottom" constant="460" id="ncb-zE-Fpw"/>
                             <constraint firstItem="DXp-co-6JX" firstAttribute="trailing" secondItem="dSf-I2-xe0" secondAttribute="trailing" id="p1V-lp-dPq"/>
                             <constraint firstAttribute="bottom" secondItem="eFb-b7-J3Z" secondAttribute="bottom" id="s9w-8d-kyS"/>
+                            <constraint firstItem="PfH-N2-0Xr" firstAttribute="centerX" secondItem="dSf-I2-xe0" secondAttribute="centerX" id="tvD-bq-f4S"/>
                             <constraint firstItem="dSf-I2-xe0" firstAttribute="leading" secondItem="DXp-co-6JX" secondAttribute="leading" id="uB9-oq-neh"/>
+                            <constraint firstItem="dTG-27-qcR" firstAttribute="top" secondItem="dSf-I2-xe0" secondAttribute="bottom" constant="5" id="yfy-Li-Pyc"/>
                         </constraints>
                     </view>
                     <connections>
@@ -478,7 +503,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnI-vo-y2y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5622" y="-101"/>
+            <point key="canvasLocation" x="5146" y="-64"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ED4-5P-9jv">
@@ -515,12 +540,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrowshape.backward.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="Ball" width="1024" height="1024"/>
+        <image name="arrowshape.backward.circle" catalog="system" width="128" height="123"/>
         <image name="heart" catalog="system" width="128" height="107"/>
-        <image name="house.fill" catalog="system" width="32" height="32"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

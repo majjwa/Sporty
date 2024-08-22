@@ -178,8 +178,8 @@
 		134DA98D2C74BD6A007444FD /* LeaguesDetailsScreen */ = {
 			isa = PBXGroup;
 			children = (
-				13A776AC2C77BFD500AB7FC7 /* Extensions */,
 				139C488A2C77B66700D3A9BC /* components */,
+				13A776AC2C77BFD500AB7FC7 /* Extensions */,
 				134DA98E2C74BD7F007444FD /* view */,
 				134DA98F2C74BD85007444FD /* presenter */,
 			);

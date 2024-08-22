@@ -54,7 +54,13 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let ViewController = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController {
+            ViewController.modalPresentationStyle = .fullScreen
+            self.present(ViewController, animated: true, completion: nil)
+        }
+
         
         
         

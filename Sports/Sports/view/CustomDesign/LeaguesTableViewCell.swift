@@ -14,7 +14,7 @@ class LeaguesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.layer.cornerRadius = 15
-                self.contentView.layer.masksToBounds = true
+        self.contentView.layer.masksToBounds = true
         
                 
     }

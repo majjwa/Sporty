@@ -16,17 +16,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="301" height="160"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Ball" translatesAutoresizingMaskIntoConstraints="NO" id="HeM-T6-wYp">
+                        <rect key="frame" x="0.0" y="5" width="301" height="97"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Km-WE-iYm">
-                        <rect key="frame" x="120" y="126" width="69" height="21"/>
+                        <rect key="frame" x="116" y="129" width="69" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Basketball" translatesAutoresizingMaskIntoConstraints="NO" id="HeM-T6-wYp">
-                        <rect key="frame" x="62" y="20" width="199" height="89"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -36,10 +36,10 @@
                 <outlet property="logo" destination="HeM-T6-wYp" id="cFm-b2-qQ1"/>
                 <outlet property="teamName" destination="6Km-WE-iYm" id="YiA-I1-QFt"/>
             </connections>
-            <point key="canvasLocation" x="309.16030534351142" y="-18.30985915492958"/>
+            <point key="canvasLocation" x="242" y="-80"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Basketball" width="1200" height="834"/>
+        <image name="Ball" width="1024" height="1024"/>
     </resources>
 </document>

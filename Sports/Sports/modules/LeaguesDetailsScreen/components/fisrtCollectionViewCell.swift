@@ -22,9 +22,8 @@ class fisrtCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        self.contentView.layer.cornerRadius = 20
-        self.contentView.layer.masksToBounds = true
+      
+    
     }
 
 }
