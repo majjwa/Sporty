@@ -8,5 +8,12 @@
 import UIKit
 
 class upComingEventsCollectionViewCell: UICollectionViewCell {
+  
+    
+    
+    
+    
+    
+    
     
 }

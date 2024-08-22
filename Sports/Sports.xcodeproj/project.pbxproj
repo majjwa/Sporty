@@ -181,8 +181,8 @@
 			isa = PBXGroup;
 			children = (
 				13158E142C7751FD00F59737 /* Components */,
-				134DA98F2C74BD85007444FD /* presenter */,
 				134DA98E2C74BD7F007444FD /* view */,
+				134DA98F2C74BD85007444FD /* presenter */,
 			);
 			path = LeaguesDetailsScreen;
 			sourceTree = "<group>";
@@ -302,6 +302,7 @@
 		137108182C737AF00055E531 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				13D839A32C7767D600FA7CD3 /* Components */,
 				186093042C761D7100D7100F /* Extensions */,
 				1371081B2C737B050055E531 /* view */,
 				1371081D2C737B140055E531 /* presenter */,
@@ -313,7 +314,6 @@
 			isa = PBXGroup;
 			children = (
 				137108192C737B000055E531 /* HomeViewController.swift */,
-				13DF22F02C73800F0021E788 /* HomeCollectionViewCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -339,6 +339,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		13D839A32C7767D600FA7CD3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				13DF22F02C73800F0021E788 /* HomeCollectionViewCell.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		13DF22EB2C737C120021E788 /* FavScreen */ = {
