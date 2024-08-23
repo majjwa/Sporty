@@ -29,8 +29,7 @@ class LeaguesTableViewCell: UITableViewCell {
             }
     }
     func openYouTube() {
-//            var str = LeaguesName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        var str = "UEFAEuropaLeague"
+    var str = LeaguesName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             str = str.replacingOccurrences(of: " ", with: "")
             print("\(str)")
             UIApplication.shared.open(URL(string: ("https://www.youtube.com/@\(str)"))!, options: [:], completionHandler: nil)

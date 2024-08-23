@@ -14,7 +14,16 @@ extension LeaguesDetailsViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        switch section {
+        case 0:
+          return presenter?.upComingEvents.count ?? 0
+        case 1:
+          return presenter?.latestEvents.count ?? 0
+        case 2:
+            return presenter?.teams.count ?? 0
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -22,21 +31,52 @@ extension LeaguesDetailsViewController: UICollectionViewDelegate, UICollectionVi
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fisrtCollectionViewCell", for: indexPath) as! fisrtCollectionViewCell
-           
+            let event = presenter?.upComingEvents[indexPath.row]
             
-            
+            cell.leagueName.text = presenter?.selectedLeague?.leagueName
+            cell.team1Name.text = event?.eventHomeTeam
+            cell.team2Name.text = event?.eventAwayTeam
+            cell.date.text = event?.eventDate
+            cell.time.text = event?.eventTime
+            cell.team1state.text = event?.eventFinalResult
+            cell.team2state.text = event?.eventFinalResult
+
+            if let team1LogoUrl = event?.homeTeamLogo {
+                cell.team1Img.kf.setImage(with: URL(string: team1LogoUrl))
+            }
+            if let team2LogoUrl = event?.awayTeamLogo {
+                cell.team2Img.kf.setImage(with: URL(string: team2LogoUrl))
+            }
+
             cell.layer.cornerRadius = 15
             return cell
 
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "secondCollectionViewCell", for: indexPath) as! secondCollectionViewCell
+            let event = presenter?.latestEvents[indexPath.row]
+            
+          //  cell.leagueName.text = presenter?.selectedLeague?.leagueName
+            cell.team1Name.text = event?.eventHomeTeam
+            cell.team2Name.text = event?.eventAwayTeam
+            if let team1LogoUrl = event?.homeTeamLogo {
+                cell.img1.kf.setImage(with: URL(string: team1LogoUrl))
+            }
+            if let team2LogoUrl = event?.awayTeamLogo {
+                cell.img2.kf.setImage(with: URL(string: team2LogoUrl))
+            }
+            cell.score.text = event?.eventFinalResult
+            
             cell.layer.cornerRadius = 15
-
             return cell
 
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "thirdCollectionViewCell", for: indexPath) as! thirdCollectionViewCell
             cell.layer.cornerRadius = 15
+            let event = presenter?.teams[indexPath.row]
+            cell.teamName.text = event?.teamName
+            if let LogoUrl = event?.teamLogo {
+                cell.logo.kf.setImage(with: URL(string: LogoUrl))
+            }
 
             return cell
 

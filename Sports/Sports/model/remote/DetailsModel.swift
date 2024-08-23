@@ -38,4 +38,5 @@ struct Event: Decodable {
         case awayTeamLogo = "away_team_logo"
        
     }
+    
 }

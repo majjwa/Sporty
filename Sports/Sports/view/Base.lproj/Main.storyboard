@@ -383,7 +383,7 @@
                                     <color key="baseForegroundColor" systemColor="systemGreenColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="Dismiss:" destination="dfi-AM-AWP" eventType="touchUpInside" id="pyj-5b-jJb"/>
+                                    <action selector="dismiss:" destination="dfi-AM-AWP" eventType="touchUpInside" id="5gB-VG-zqH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6G-hr-zvV">
@@ -394,7 +394,7 @@
                                     <color key="baseForegroundColor" systemColor="systemGreenColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="favBtn:" destination="dfi-AM-AWP" eventType="touchUpInside" id="0CH-Yh-bx7"/>
+                                    <action selector="favBtnTapped:" destination="dfi-AM-AWP" eventType="touchUpInside" id="lqd-aO-tC2"/>
                                 </connections>
                             </button>
                         </subviews>

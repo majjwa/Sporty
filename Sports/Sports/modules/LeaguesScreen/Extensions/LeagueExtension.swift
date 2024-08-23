@@ -9,23 +9,23 @@ import UIKit
 import Kingfisher
 
 extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return presenter?.leagues.count ?? 0
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeaguesTableViewCell", for: indexPath) as! LeaguesTableViewCell
         // Set selected background color to black
         cell.selectedBackgroundView = {
-              let view = UIView()
+            let view = UIView()
             view.backgroundColor = .black
-              return view
-          }()
+            return view
+        }()
         cell.backgroundColor = .black
         if let league = presenter?.leagues[indexPath.section] {
             cell.LeaguesName.text = league.leagueName
@@ -39,7 +39,7 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
             } else {
                 cell.LeaguesImg.image = placeholderImage
             }
-        
+            
             cell.LeaguesImg.layer.cornerRadius = 10
             cell.LeaguesImg.clipsToBounds = true
             
@@ -47,24 +47,28 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
         else {
             cell.LeaguesName.text = "Loading"
             cell.LeaguesImg.image = UIImage(systemName: "arrowshape.down.circle")
-                }
-
+        }
+        
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
+        let selectedLeague = presenter?.leagues[indexPath.row]
+        
+        let leagueId = selectedLeague?.leagueKey
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let ViewController = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController {
-            ViewController.modalPresentationStyle = .fullScreen
-            self.present(ViewController, animated: true, completion: nil)
+        if let leaguesDetailsVC = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController {
+            leaguesDetailsVC.leagueId = leagueId
+            leaguesDetailsVC.presenter?.selectedLeague = selectedLeague
+            let presenter = LeaguesDetailsPresenter(view: leaguesDetailsVC, apiManager: APIManager.shared)
+            leaguesDetailsVC.presenter = presenter
+            
+            leaguesDetailsVC.modalPresentationStyle = .fullScreen
+            self.present(leaguesDetailsVC, animated: true, completion: nil)
         }
-
-        
-        
-        
-        
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -81,3 +85,4 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
         return footerView
     }
 }
+
