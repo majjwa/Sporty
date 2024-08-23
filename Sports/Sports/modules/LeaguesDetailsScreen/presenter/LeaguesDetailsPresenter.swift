@@ -68,20 +68,15 @@ class LeaguesDetailsPresenter {
         var teamSet = Set<Team>()
         
         for event in events {
-            // Use non-optional values directly
             let homeTeamKey = "\(event.homeTeamKey)"
             let awayTeamKey = "\(event.awayTeamKey)"
             let homeTeamName = event.eventHomeTeam
             let awayTeamName = event.eventAwayTeam
             let homeTeamLogo = event.homeTeamLogo ?? ""
             let awayTeamLogo = event.awayTeamLogo ?? ""
-
-           
+            let homeTeam = Team(teamKey: homeTeamKey, teamName: homeTeamName, teamLogo: homeTeamLogo, players: [],coaches: [])
+        let awayTeam = Team(teamKey: awayTeamKey, teamName: awayTeamName, teamLogo: awayTeamLogo,players: [],coaches: [])
                 
-                let homeTeam = Team(teamKey: homeTeamKey, teamName: homeTeamName, teamLogo: homeTeamLogo)
-                let awayTeam = Team(teamKey: awayTeamKey, teamName: awayTeamName, teamLogo: awayTeamLogo)
-                
-                // Insert teams into the set
                 teamSet.insert(homeTeam)
                 teamSet.insert(awayTeam)
             

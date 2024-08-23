@@ -1,30 +1,43 @@
-//
-//  TeamDetailsViewController.swift
-//  Sporty
-//
-//  Created by marwa maky on 21/08/2024.
-//
-
 import UIKit
+import Kingfisher
 
-class TeamDetailsViewController: UIViewController {
+protocol TeamDetailsViewProtocol: AnyObject {
+    func updateTeamDetails()
+}
 
-    
+class TeamDetailsViewController: UIViewController, TeamDetailsViewProtocol {
+
     @IBOutlet weak var lbl1: UILabel!
     @IBOutlet weak var teamTbl: UITableView!
     @IBOutlet weak var TeamImg: UIImageView!
+    @IBOutlet weak var coachName: UILabel!
+    
+    var presenter: TeamsDetailsPresenter?
+    var teamKey: Int?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        teamTbl.register(UINib(nibName: "PlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "PlayerTableViewCell")
+        teamTbl.dataSource = self
+        teamTbl.delegate = self
         
+        if let teamKey = teamKey {
+            presenter = TeamsDetailsPresenter(view: self, teamKey: teamKey, apiManager: APIManager.shared)
+            presenter?.fetchTeamDetails()
+        } else {
+            print("Team key is not set.")
+        }
     }
     
-   
+    func updateTeamDetails() {
+        lbl1.text = presenter?.team?.teamName
+        if let teamLogoUrl = URL(string: presenter?.team?.teamLogo ?? "") {
+            TeamImg.kf.setImage(with: teamLogoUrl)
+        }
+        teamTbl.reloadData()
+    }
 
     @IBAction func dismiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-  
-
 }

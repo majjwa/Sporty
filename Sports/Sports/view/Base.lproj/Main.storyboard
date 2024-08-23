@@ -475,6 +475,13 @@
                                     <action selector="dismiss:" destination="4rO-yW-jwN" eventType="touchUpInside" id="bum-Yr-9eN"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPo-4V-6kq">
+                                <rect key="frame" x="24" y="170" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DXp-co-6JX"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -497,6 +504,7 @@
                     </view>
                     <connections>
                         <outlet property="TeamImg" destination="dTG-27-qcR" id="6Gc-Om-2Sj"/>
+                        <outlet property="coachName" destination="xPo-4V-6kq" id="8Tg-Ze-zcu"/>
                         <outlet property="lbl1" destination="h7a-ir-yz2" id="K7o-bM-WPq"/>
                         <outlet property="teamTbl" destination="eFb-b7-J3Z" id="WnS-yG-WAq"/>
                     </connections>

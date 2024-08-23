@@ -84,14 +84,26 @@ extension LeaguesDetailsViewController: UICollectionViewDelegate, UICollectionVi
             return UICollectionViewCell()
         }
     }
-    
-   
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "TeamDetailsViewController") as? TeamDetailsViewController {
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
+        
+        switch indexPath.section {
+        case 0:
+            return
+        case 1:
+            return
+        case 2:
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let selectedTeamKey = presenter?.teams[indexPath.row].teamKey
+            if let vc = storyboard.instantiateViewController(withIdentifier: "TeamDetailsViewController") as? TeamDetailsViewController {
+                let newPresenter = TeamsDetailsPresenter(view: vc, teamKey: selectedTeamKey, apiManager: presenter?.apiManager)
+                vc.presenter = newPresenter
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            }
+
+        default:
+            return
         }}
     func createUpcomingEventsSection() -> NSCollectionLayoutSection {
        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
