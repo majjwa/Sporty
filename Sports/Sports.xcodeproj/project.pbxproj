@@ -486,8 +486,8 @@
 		186093072C761EFE00D7100F /* Utilties */ = {
 			isa = PBXGroup;
 			children = (
-				186093082C761F0C00D7100F /* Table&CollectionNibExt */,
 				13F24CDB2C78C0E900E63EC6 /* DateHelper.swift */,
+				186093082C761F0C00D7100F /* Table&CollectionNibExt */,
 			);
 			path = Utilties;
 			sourceTree = "<group>";

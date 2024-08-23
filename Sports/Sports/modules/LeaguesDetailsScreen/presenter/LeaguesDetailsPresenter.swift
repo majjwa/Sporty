@@ -63,25 +63,29 @@ class LeaguesDetailsPresenter {
         }
     }
 
-    private func processTeamData(from events: [Event]) {
-        // Resolve duplicates
-        var teamSet = Set<Team>()
+    
         
-        for event in events {
-            let homeTeamKey = "\(event.homeTeamKey)"
-            let awayTeamKey = "\(event.awayTeamKey)"
-            let homeTeamName = event.eventHomeTeam
-            let awayTeamName = event.eventAwayTeam
-            let homeTeamLogo = event.homeTeamLogo ?? ""
-            let awayTeamLogo = event.awayTeamLogo ?? ""
-            let homeTeam = Team(teamKey: homeTeamKey, teamName: homeTeamName, teamLogo: homeTeamLogo, players: [],coaches: [])
-        let awayTeam = Team(teamKey: awayTeamKey, teamName: awayTeamName, teamLogo: awayTeamLogo,players: [],coaches: [])
+        private func processTeamData(from events: [Event]) {
+            // Resolve duplicates
+            var teamSet = Set<Team>()
+            for event in events {
+                let homeTeamKey = event.homeTeamKey
+                let awayTeamKey = event.awayTeamKey
+                let homeTeamName = event.eventHomeTeam
+                let awayTeamName = event.eventAwayTeam
+                let homeTeamLogo = event.homeTeamLogo ?? ""
+                let awayTeamLogo = event.awayTeamLogo ?? ""
+                
+                let homeTeam = Team(teamKey: homeTeamKey, teamName: homeTeamName, teamLogo: homeTeamLogo, players: [], coaches: [])
+                let awayTeam = Team(teamKey: awayTeamKey, teamName: awayTeamName, teamLogo: awayTeamLogo, players: [], coaches: [])
                 
                 teamSet.insert(homeTeam)
                 teamSet.insert(awayTeam)
+            }
             
+            teams = Array(teamSet)
         }
-        teams = Array(teamSet)
-    }
+
+       
 
 }

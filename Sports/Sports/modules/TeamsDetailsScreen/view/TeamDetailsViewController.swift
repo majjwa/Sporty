@@ -7,30 +7,37 @@ protocol TeamDetailsViewProtocol: AnyObject {
 
 class TeamDetailsViewController: UIViewController, TeamDetailsViewProtocol {
 
-    @IBOutlet weak var lbl1: UILabel!
     @IBOutlet weak var teamTbl: UITableView!
     @IBOutlet weak var TeamImg: UIImageView!
     @IBOutlet weak var coachName: UILabel!
     
+    @IBOutlet weak var tittle: UILabel!
     var presenter: TeamsDetailsPresenter?
     var teamKey: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        teamTbl.register(UINib(nibName: "PlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "PlayerTableViewCell")
+        
+        teamTbl.register(UINib(nibName: "playersTableViewCell", bundle: nil), forCellReuseIdentifier: "playersTableViewCell")
         teamTbl.dataSource = self
         teamTbl.delegate = self
         
-        if let teamKey = teamKey {
-            presenter = TeamsDetailsPresenter(view: self, teamKey: teamKey, apiManager: APIManager.shared)
+        if let teamKey = teamKey {  // Use the passed teamKey
+            presenter = TeamsDetailsPresenter(teamKey: teamKey)
+            presenter?.apiManager = APIManager.shared  // Ensure APIManager is set if needed
+            presenter?.view = self  // Set the view to update the UI
             presenter?.fetchTeamDetails()
         } else {
-            print("Team key is not set.")
+            print("Team key is missing.")
         }
     }
+
     
     func updateTeamDetails() {
-        lbl1.text = presenter?.team?.teamName
+        tittle.text = presenter?.team?.teamName ?? ""
+        tittle.textColor = .white
+        
+        coachName.text = presenter?.team?.coaches.first?.coachName ?? ""
         if let teamLogoUrl = URL(string: presenter?.team?.teamLogo ?? "") {
             TeamImg.kf.setImage(with: teamLogoUrl)
         }

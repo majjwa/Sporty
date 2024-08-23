@@ -6,12 +6,9 @@ class TeamsDetailsPresenter {
     var apiManager: APIManager?
     var team: Team?
 
-    init(view: TeamDetailsViewProtocol?, teamKey: Int?, apiManager: APIManager?) {
-        self.view = view
+    init(teamKey: Int?) {
         self.teamKey = teamKey
-        self.apiManager = apiManager
     }
-    
     func fetchTeamDetails() {
         guard let teamKey = teamKey else {
             print("Team key is missing.")
@@ -47,4 +44,5 @@ class TeamsDetailsPresenter {
             }
         }
     }
+
 }

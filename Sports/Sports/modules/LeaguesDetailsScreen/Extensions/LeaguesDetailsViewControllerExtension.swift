@@ -94,13 +94,19 @@ extension LeaguesDetailsViewController: UICollectionViewDelegate, UICollectionVi
             return
         case 2:
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let selectedTeamKey = presenter?.teams[indexPath.row].teamKey
-            if let vc = storyboard.instantiateViewController(withIdentifier: "TeamDetailsViewController") as? TeamDetailsViewController {
-                let newPresenter = TeamsDetailsPresenter(view: vc, teamKey: selectedTeamKey, apiManager: presenter?.apiManager)
-                vc.presenter = newPresenter
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true, completion: nil)
+            if let selectedTeamKey = presenter?.teams[indexPath.row].teamKey {
+                if let vc = storyboard.instantiateViewController(withIdentifier: "TeamDetailsViewController") as? TeamDetailsViewController {
+                    vc.teamKey = selectedTeamKey  // Pass the teamKey directly
+                    let newPresenter = TeamsDetailsPresenter(teamKey: selectedTeamKey)
+                    print(selectedTeamKey)  // Ensure the key is printed correctly
+                    vc.presenter = newPresenter
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true, completion: nil)
+                }
+            } else {
+                print("Team key is missing.")
             }
+
 
         default:
             return
@@ -108,7 +114,7 @@ extension LeaguesDetailsViewController: UICollectionViewDelegate, UICollectionVi
     func createUpcomingEventsSection() -> NSCollectionLayoutSection {
        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.94), heightDimension: .absolute(200))
+       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.94), heightDimension: .absolute(250))
        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
        let section = NSCollectionLayoutSection(group: group)
        section.orthogonalScrollingBehavior = .groupPaging
@@ -129,7 +135,7 @@ extension LeaguesDetailsViewController: UICollectionViewDelegate, UICollectionVi
     func createLatestEventsSection() -> NSCollectionLayoutSection {
        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
+       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(110))
        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
        let section = NSCollectionLayoutSection(group: group)
        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
@@ -140,12 +146,13 @@ extension LeaguesDetailsViewController: UICollectionViewDelegate, UICollectionVi
 
     func createTeamsSection() -> NSCollectionLayoutSection {
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(100), heightDimension: .absolute(100))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(100), heightDimension: .absolute(100))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(150), heightDimension: .absolute(150))
+         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+         
+         // Increase the size of the group
+         let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(150), heightDimension: .absolute(150))
+         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+           
         let section = NSCollectionLayoutSection(group: group)
         
         section.orthogonalScrollingBehavior = .continuous
