@@ -1,25 +1,23 @@
-//
-//  Extensions.swift
-//  Sporty
-//
-//  Created by marwa maky on 21/08/2024.
-//
-
 import UIKit
 import Kingfisher
 
 extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter?.leagues.count ?? 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if isFavoritesMode {
+            return presenter?.coreDataManager?.fetchFavoriteLeagues().count ?? 0
+        } else {
+            return presenter?.leagues.count ?? 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeaguesTableViewCell", for: indexPath) as! LeaguesTableViewCell
+        
         // Set selected background color to black
         cell.selectedBackgroundView = {
             let view = UIView()
@@ -27,7 +25,19 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
             return view
         }()
         cell.backgroundColor = .black
-        if let league = presenter?.leagues[indexPath.section] {
+        
+        let league: LeaguesResult?
+        
+        if isFavoritesMode {
+            // Fetch favorite leagues
+            let favoriteLeagues = presenter?.coreDataManager?.fetchFavoriteLeagues() ?? []
+            league = favoriteLeagues[indexPath.row]
+        } else {
+            // Display regular leagues
+            league = presenter?.leagues[indexPath.row]
+        }
+        
+        if let league = league {
             cell.LeaguesName.text = league.leagueName
             
             let placeholderImage = UIImage(named: "Ball")
@@ -42,9 +52,7 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell.LeaguesImg.layer.cornerRadius = 10
             cell.LeaguesImg.clipsToBounds = true
-            
-        }
-        else {
+        } else {
             cell.LeaguesName.text = "Loading"
             cell.LeaguesImg.image = UIImage(systemName: "arrowshape.down.circle")
         }
@@ -53,20 +61,28 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedLeague = presenter?.leagues[indexPath.row]
-           let leagueId = selectedLeague?.leagueKey
+        let selectedLeague: LeaguesResult?
+        
+        if isFavoritesMode {
+            let favoriteLeagues = presenter?.coreDataManager?.fetchFavoriteLeagues() ?? []
+            selectedLeague = favoriteLeagues[indexPath.row]
+        } else {
+            selectedLeague = presenter?.leagues[indexPath.row]
+        }
+        
+        let leagueId = selectedLeague?.leagueKey
         let defaultCoreDataManager = CoreDataManager(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
-
-           let storyboard = UIStoryboard(name: "Main", bundle: nil)
-           if let leaguesDetailsVC = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController {
-               leaguesDetailsVC.leagueId = leagueId
-               leaguesDetailsVC.selectedLeague = selectedLeague
-               let presenter = LeaguesDetailsPresenter(view: leaguesDetailsVC, apiManager: APIManager.shared, coreDataManager: leaguesDetailsVC.presenter?.coreDataManager ?? defaultCoreDataManager)
-               leaguesDetailsVC.presenter = presenter
-             
-               leaguesDetailsVC.modalPresentationStyle = .fullScreen
-               self.present(leaguesDetailsVC, animated: true, completion: nil)
-           }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let leaguesDetailsVC = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController {
+            leaguesDetailsVC.leagueId = leagueId
+            leaguesDetailsVC.selectedLeague = selectedLeague
+            let presenter = LeaguesDetailsPresenter(view: leaguesDetailsVC, apiManager: APIManager.shared, coreDataManager: leaguesDetailsVC.presenter?.coreDataManager ?? defaultCoreDataManager)
+            leaguesDetailsVC.presenter = presenter
+            
+            leaguesDetailsVC.modalPresentationStyle = .fullScreen
+            self.present(leaguesDetailsVC, animated: true, completion: nil)
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -74,13 +90,55 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
+        return 100
     }
-
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView()
         footerView.backgroundColor = .clear
         return footerView
     }
-}
 
+    // Add space between cells
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.layer.masksToBounds = true
+        cell.contentView.layer.cornerRadius = 30
+        cell.contentView.layer.borderWidth = 8
+        cell.contentView.layer.borderColor = UIColor.black.cgColor
+    }
+
+        
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+           if isFavoritesMode {
+               let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+                   guard let self = self else { return }
+                   
+                   // Fetch favorite leagues
+                   var favoriteLeagues = self.presenter?.coreDataManager?.fetchFavoriteLeagues() ?? []
+                   
+                   guard indexPath.row < favoriteLeagues.count else {
+                       completionHandler(false)
+                       return
+                   }
+                   
+                   let leagueToDelete = favoriteLeagues[indexPath.section]
+                   
+                   let leagueKey = leagueToDelete.leagueKey
+                   self.presenter?.coreDataManager?.deleteFavorite(leagueKey: leagueKey)
+                
+                   favoriteLeagues.remove(at: indexPath.section)
+
+                       tableView.deleteRows(at: [indexPath], with: .automatic)
+                
+               }
+               deleteAction.backgroundColor = .red
+               let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+               configuration.performsFirstActionWithFullSwipe = true
+               return configuration
+           }
+           return nil
+       }
+       
+
+
+
+}

@@ -11,12 +11,14 @@ import Foundation
 class LeaguesPresenter {
     var leaguesView: LeaguesProtocol?
     var apiManager: APIManager?
-
+    var coreDataManager: CoreDataManager?
     var leagues: [LeaguesResult] = []  
     
-    init(leaguesView: LeaguesProtocol? = nil, apiManager: APIManager? = APIManager.shared) {
+    init(leaguesView: LeaguesProtocol? = nil, apiManager: APIManager? = APIManager.shared ,coreDataManager: CoreDataManager) {
         self.leaguesView = leaguesView
         self.apiManager = apiManager
+        self.coreDataManager = coreDataManager
+
     }
     
     func fetchLeagues(for sport: String) {
@@ -31,4 +33,10 @@ class LeaguesPresenter {
             }
         }
     }
+    func fetchFavoriteLeagues() {
+        let favorites = coreDataManager?.fetchFavoriteLeagues() ?? []
+        self.leagues = favorites
+        self.leaguesView?.updateTable()
+    }
+
 }

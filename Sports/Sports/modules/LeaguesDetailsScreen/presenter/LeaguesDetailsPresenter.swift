@@ -16,7 +16,6 @@ class LeaguesDetailsPresenter {
         self.dateHelper = dateHelper
     }
 
-
     func fetchUpComing(leagueId: Int) {
         let fromDate = dateHelper.getCurrentDate()
         let toDate = dateHelper.getOneYearFromNowDate()
@@ -66,19 +65,11 @@ class LeaguesDetailsPresenter {
     }
 
     private func processTeamData(from events: [Event]) {
-        // Resolve duplicates
         var teamSet = Set<Team>()
         for event in events {
-            let homeTeamKey = event.homeTeamKey
-            let awayTeamKey = event.awayTeamKey
-            let homeTeamName = event.eventHomeTeam
-            let awayTeamName = event.eventAwayTeam
-            let homeTeamLogo = event.homeTeamLogo ?? ""
-            let awayTeamLogo = event.awayTeamLogo ?? ""
-
-            let homeTeam = Team(teamKey: homeTeamKey, teamName: homeTeamName, teamLogo: homeTeamLogo, players: [], coaches: [])
-            let awayTeam = Team(teamKey: awayTeamKey, teamName: awayTeamName, teamLogo: awayTeamLogo, players: [], coaches: [])
-
+            let homeTeam = Team(teamKey: event.homeTeamKey, teamName: event.eventHomeTeam, teamLogo: event.homeTeamLogo ?? "", players: [], coaches: [])
+            let awayTeam = Team(teamKey: event.awayTeamKey, teamName: event.eventAwayTeam, teamLogo: event.awayTeamLogo ?? "", players: [], coaches: [])
+            
             teamSet.insert(homeTeam)
             teamSet.insert(awayTeam)
         }
@@ -87,18 +78,26 @@ class LeaguesDetailsPresenter {
     }
 
     func isLeagueFavorite(_ league: LeaguesResult) -> Bool {
-        return ((coreDataManager.isLeagueFavorite(leagueKey: league.leagueKey)) != nil)
+        return coreDataManager.isLeagueFavorite(leagueKey: league.leagueKey)
     }
+
     func fetchFavoriteState() {
-        guard let selectedLeague = selectedLeague else { return }
-        let isFavorite = isLeagueFavorite(selectedLeague)
+        guard let league = selectedLeague else {
+            print("No selected league to check for favorites")
+            return
+        }
+        
+        let isFavorite = coreDataManager.isLeagueFavorite(leagueKey: league.leagueKey)
         view?.updateFavoriteStatus(isFavorite: isFavorite)
     }
+
     func saveFavorite(_ league: LeaguesResult) {
         coreDataManager.saveFavorite(league: league)
+        fetchFavoriteState()
     }
 
     func deleteFavorite(_ league: LeaguesResult) {
         coreDataManager.deleteFavorite(leagueKey: league.leagueKey)
+        fetchFavoriteState()
     }
 }

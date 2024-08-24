@@ -1,10 +1,3 @@
-//
-//  CoreDataManager.swift
-//  Sporty
-//
-//  Created by marwa maky on 24/08/2024.
-//
-
 import CoreData
 
 class CoreDataManager {
@@ -14,18 +7,21 @@ class CoreDataManager {
         self.context = context
     }
 
-    func isLeagueFavorite(leagueKey: Int) -> FavModel? {
+
+    func isLeagueFavorite(leagueKey: Int) -> Bool {
         let fetchRequest: NSFetchRequest<FavModel> = FavModel.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "leagueKey = %d", leagueKey)
         
         do {
             let results = try context.fetch(fetchRequest)
-            return results.first
+            print("Fetch results: \(results)")
+            return results.first != nil
         } catch {
             print("Failed fetching: \(error.localizedDescription)")
-            return nil
+            return false
         }
     }
+
 
     func saveFavorite(league: LeaguesResult) {
         let favoriteObject = FavModel(context: context)
@@ -41,23 +37,37 @@ class CoreDataManager {
             print("Failed saving: \(error.localizedDescription)")
         }
     }
-
+    func fetchFavoriteLeagues() -> [LeaguesResult] {
+        let fetchRequest: NSFetchRequest<FavModel> = FavModel.fetchRequest()
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            return results.map {
+                LeaguesResult(leagueKey: Int($0.leagueKey),
+                              leagueName: $0.leagueName ?? "",
+                              leagueLogo: $0.leagueImg ?? "")
+            }
+        } catch {
+            print("Error fetching favorite leagues: \(error)")
+            return []
+        }
+    }
     func deleteFavorite(leagueKey: Int) {
         let fetchRequest: NSFetchRequest<FavModel> = FavModel.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "leagueKey = %d", leagueKey)
         
         do {
             let results = try context.fetch(fetchRequest)
-            for object in results {
-                context.delete(object)
+            if let favoriteToDelete = results.first {
+                context.delete(favoriteToDelete)
+                try context.save()
+                print("Deleted successfully")
+            } else {
+                print("Favorite league not found")
             }
-            try context.save()
-            print("Deleted successfully")
         } catch {
             print("Failed deleting: \(error.localizedDescription)")
         }
     }
-   
 
-    
 }

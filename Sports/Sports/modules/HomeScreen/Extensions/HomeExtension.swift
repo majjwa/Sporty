@@ -53,6 +53,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             print("\(sport.title) selected")
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesViewController") as! LeaguesViewController
             vc.sportType = sport.title 
+            vc.isFavoritesMode = false
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

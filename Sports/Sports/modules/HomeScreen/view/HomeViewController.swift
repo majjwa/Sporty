@@ -47,7 +47,8 @@ class HomeViewController: UIViewController, HomeProtocol {
     @IBAction func favTabBarTapped(_ sender: UIButton) {
         homeImg.tintColor = .white
         favImg.tintColor = .green
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "FavViewController") as! FavViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesViewController") as! LeaguesViewController
+        vc.isFavoritesMode = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func homeDesign(){
