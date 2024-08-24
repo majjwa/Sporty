@@ -11,12 +11,23 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+            
+            // Set up initial view controller and presenter
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let leaguesDetailsVC = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController {
+                let presenter = LeaguesDetailsPresenter(
+                    view: leaguesDetailsVC,
+                    apiManager: APIManager.shared,
+                    coreDataManager: coreDataManager
+                )
+                leaguesDetailsVC.presenter = presenter
+            }
+            
+            return true
+        }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
-    }
+    
 
     // MARK: UISceneSession Lifecycle
 
@@ -61,8 +72,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
 
-    // MARK: - Core Data Saving support
+    lazy var coreDataManager: CoreDataManager = {
+            return CoreDataManager(context: persistentContainer.viewContext)
+        }()
 
+    
+        
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

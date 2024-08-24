@@ -1,19 +1,21 @@
 import Foundation
-
 class LeaguesDetailsPresenter {
     var view: LeaguesDetailsProtocol?
     var apiManager: APIManager?
+    var coreDataManager: CoreDataManager
     var dateHelper: DateHelper
     var upComingEvents: [Event] = []
     var latestEvents: [Event] = []
     var teams: [Team] = []
     var selectedLeague: LeaguesResult?
 
-    init(view: LeaguesDetailsProtocol? = nil, apiManager: APIManager? = nil, dateHelper: DateHelper = DateHelper()) {
+    init(view: LeaguesDetailsProtocol? = nil, apiManager: APIManager? = nil, coreDataManager: CoreDataManager, dateHelper: DateHelper = DateHelper()) {
         self.view = view
         self.apiManager = apiManager
+        self.coreDataManager = coreDataManager
         self.dateHelper = dateHelper
     }
+
 
     func fetchUpComing(leagueId: Int) {
         let fromDate = dateHelper.getCurrentDate()
@@ -63,29 +65,36 @@ class LeaguesDetailsPresenter {
         }
     }
 
-    
-        
-        private func processTeamData(from events: [Event]) {
-            // Resolve duplicates
-            var teamSet = Set<Team>()
-            for event in events {
-                let homeTeamKey = event.homeTeamKey
-                let awayTeamKey = event.awayTeamKey
-                let homeTeamName = event.eventHomeTeam
-                let awayTeamName = event.eventAwayTeam
-                let homeTeamLogo = event.homeTeamLogo ?? ""
-                let awayTeamLogo = event.awayTeamLogo ?? ""
-                
-                let homeTeam = Team(teamKey: homeTeamKey, teamName: homeTeamName, teamLogo: homeTeamLogo, players: [], coaches: [])
-                let awayTeam = Team(teamKey: awayTeamKey, teamName: awayTeamName, teamLogo: awayTeamLogo, players: [], coaches: [])
-                
-                teamSet.insert(homeTeam)
-                teamSet.insert(awayTeam)
-            }
-            
-            teams = Array(teamSet)
+    private func processTeamData(from events: [Event]) {
+        // Resolve duplicates
+        var teamSet = Set<Team>()
+        for event in events {
+            let homeTeamKey = event.homeTeamKey
+            let awayTeamKey = event.awayTeamKey
+            let homeTeamName = event.eventHomeTeam
+            let awayTeamName = event.eventAwayTeam
+            let homeTeamLogo = event.homeTeamLogo ?? ""
+            let awayTeamLogo = event.awayTeamLogo ?? ""
+
+            let homeTeam = Team(teamKey: homeTeamKey, teamName: homeTeamName, teamLogo: homeTeamLogo, players: [], coaches: [])
+            let awayTeam = Team(teamKey: awayTeamKey, teamName: awayTeamName, teamLogo: awayTeamLogo, players: [], coaches: [])
+
+            teamSet.insert(homeTeam)
+            teamSet.insert(awayTeam)
         }
 
-       
+        teams = Array(teamSet)
+    }
 
+    func isLeagueFavorite(_ league: LeaguesResult) -> Bool {
+        return ((coreDataManager.isLeagueFavorite(leagueKey: league.leagueKey)) != nil)
+    }
+
+    func saveFavorite(_ league: LeaguesResult) {
+        coreDataManager.saveFavorite(league: league)
+    }
+
+    func deleteFavorite(_ league: LeaguesResult) {
+        coreDataManager.deleteFavorite(leagueKey: league.leagueKey)
+    }
 }

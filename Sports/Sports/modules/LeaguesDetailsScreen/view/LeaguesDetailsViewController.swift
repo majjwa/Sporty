@@ -1,8 +1,6 @@
 import UIKit
-import CoreData
-import Foundation
 
-protocol LeaguesDetailsProtocol {
+protocol LeaguesDetailsProtocol: AnyObject {
     func updateCollectionView()
 }
 
@@ -13,17 +11,19 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
     var presenter: LeaguesDetailsPresenter?
     var leagueId: Int?
     var selectedLeague: LeaguesResult?
-
-    private var isFavorite: Bool = false
+    var isFavorite: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCompositionalLayout()
+
+        DetailsCollectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
         DetailsCollectionView.register(UINib(nibName: "fisrtCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "fisrtCollectionViewCell")
         DetailsCollectionView.register(UINib(nibName: "secondCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "secondCollectionViewCell")
         DetailsCollectionView.register(UINib(nibName: "thirdCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "thirdCollectionViewCell")
+
         DetailsCollectionView.dataSource = self
         DetailsCollectionView.delegate = self
+        setupCompositionalLayout()
 
         if let leagueId = leagueId {
             presenter?.fetchUpComing(leagueId: leagueId)
@@ -31,11 +31,11 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
             updateFavoriteStatus()
         }
     }
-    
+
     @IBAction func dismiss(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     func updateCollectionView() {
         DetailsCollectionView.reloadData()
     }
@@ -45,83 +45,39 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
     }
 
     @IBAction func favBtnTapped(_ sender: UIButton) {
-        print("btntapped")
-        guard let league = selectedLeague else { return }
-
+        guard let league = selectedLeague else {
+            print("No selected league")
+            return
+        }
+        print("Selected League: \(league.leagueKey), \(league.leagueName)")
         isFavorite.toggle()
         let imageName = isFavorite ? "heart.fill" : "heart"
         favBtn.setImage(UIImage(systemName: imageName), for: .normal)
 
         if isFavorite {
-            saveFavorite(league)
+            presenter?.saveFavorite(league)
         } else {
-            deleteFavorite(league)
+            let alert = UIAlertController(title: "Are you sure you want to delete?", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [weak self] _ in
+                self?.presenter?.deleteFavorite(league)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] _ in
+                self?.isFavorite.toggle()
+                let imageName = self!.isFavorite ? "heart.fill" : "heart"
+                self!.favBtn.setImage(UIImage(systemName: imageName), for: .normal)
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
-    private func updateFavoriteStatus() {
+    func updateFavoriteStatus() {
         guard let league = selectedLeague else { return }
-
-        if isLeagueFavorite(league) {
-            isFavorite = true
-            favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        } else {
-            isFavorite = false
-            favBtn.setImage(UIImage(systemName: "heart"), for: .normal)
-        }
+        isFavorite = presenter?.isLeagueFavorite(league) ?? false
+        let imageName = isFavorite ? "heart.fill" : "heart"
+        favBtn.setImage(UIImage(systemName: imageName), for: .normal)
     }
 
-    private func isLeagueFavorite(_ league: LeaguesResult) -> Bool {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavModel")
-        fetchRequest.predicate = NSPredicate(format: "leagueKey = %d", league.leagueKey)
-        
-        do {
-            let results = try context.fetch(fetchRequest)
-            return results.count > 0
-        } catch {
-            print("Failed fetching: \(error.localizedDescription)")
-            return false
-        }
-    }
 
-    private func saveFavorite(_ league: LeaguesResult) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "FavModel", in: context)
-        let favoriteObject = NSManagedObject(entity: entity!, insertInto: context)
-        favoriteObject.setValue(league.leagueKey, forKey: "leagueKey")
-        favoriteObject.setValue(league.leagueName, forKey: "leagueName")
-        favoriteObject.setValue(league.leagueLogo, forKey: "leagueImg")
-        favoriteObject.setValue(true, forKey: "isFav")
-        
-        do {
-            try context.save()
-            print("Saved successfully")
-        } catch {
-            print("Failed saving: \(error.localizedDescription)")
-        }
-    }
-
-    private func deleteFavorite(_ league: LeaguesResult) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavModel")
-        fetchRequest.predicate = NSPredicate(format: "leagueKey = %d", league.leagueKey)
-        
-        do {
-            let results = try context.fetch(fetchRequest)
-            for object in results {
-                context.delete(object as! NSManagedObject)
-            }
-            try context.save()
-            print("Deleted successfully")
-        } catch {
-            print("Failed deleting: \(error.localizedDescription)")
-        }
-    }
-    
     func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             switch sectionIndex {

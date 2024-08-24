@@ -53,22 +53,20 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
         let selectedLeague = presenter?.leagues[indexPath.row]
-        
-        let leagueId = selectedLeague?.leagueKey
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let leaguesDetailsVC = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController {
-            leaguesDetailsVC.leagueId = leagueId
-            leaguesDetailsVC.presenter?.selectedLeague = selectedLeague
-            let presenter = LeaguesDetailsPresenter(view: leaguesDetailsVC, apiManager: APIManager.shared)
-            leaguesDetailsVC.presenter = presenter
-            
-            leaguesDetailsVC.modalPresentationStyle = .fullScreen
-            self.present(leaguesDetailsVC, animated: true, completion: nil)
-        }
+           let leagueId = selectedLeague?.leagueKey
+        let defaultCoreDataManager = CoreDataManager(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+
+           let storyboard = UIStoryboard(name: "Main", bundle: nil)
+           if let leaguesDetailsVC = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController {
+               leaguesDetailsVC.leagueId = leagueId
+               leaguesDetailsVC.selectedLeague = selectedLeague
+               let presenter = LeaguesDetailsPresenter(view: leaguesDetailsVC, apiManager: APIManager.shared, coreDataManager: leaguesDetailsVC.presenter?.coreDataManager ?? defaultCoreDataManager)
+               leaguesDetailsVC.presenter = presenter
+             
+               leaguesDetailsVC.modalPresentationStyle = .fullScreen
+               self.present(leaguesDetailsVC, animated: true, completion: nil)
+           }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
