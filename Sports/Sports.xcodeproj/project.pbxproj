@@ -277,10 +277,10 @@
 		137108142C737ABD0055E531 /* services */ = {
 			isa = PBXGroup;
 			children = (
+				1377654E2C79EBDF00730F11 /* CoreDataManager.swift */,
 				13D3FB812C75932E00312D45 /* ApiManager.swift */,
 				13D3FB832C75A39A00312D45 /* Result.swift */,
 				13D2640F2C75BEEE0070E54A /* Decoder.swift */,
-				1377654E2C79EBDF00730F11 /* CoreDataManager.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";

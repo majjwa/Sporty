@@ -30,20 +30,15 @@ extension TeamDetailsViewController: UITableViewDataSource, UITableViewDelegate 
         }()
         cell.backgroundColor = .black
 
-        // Get the player data
         if let player = presenter?.team?.players[indexPath.row] {
             cell.playerName.text = player.playerName
-            if player.playerImage != nil {
-                let url = URL(string: player.playerImage!)
+            if let imageUrl = player.playerImage, let url = URL(string: imageUrl) {
                 cell.playerImg.kf.setImage(with: url)
-            }else {
+            } else {
                 cell.playerImg.image = UIImage(named: "player")
-
             }
-            cell.playerImg.layer.cornerRadius = 10
-            cell.playerImg.clipsToBounds = true
-            
-            // Apply shadow and corner radius to the cell
+
+            // Add shadow and corner radius to the cell
             cell.layer.cornerRadius = 10
             cell.layer.shadowColor = UIColor.black.cgColor
             cell.layer.shadowOpacity = 0.1
@@ -57,6 +52,8 @@ extension TeamDetailsViewController: UITableViewDataSource, UITableViewDelegate 
         
         return cell
     }
+
+
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100

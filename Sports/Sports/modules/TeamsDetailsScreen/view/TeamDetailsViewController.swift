@@ -22,10 +22,10 @@ class TeamDetailsViewController: UIViewController, TeamDetailsViewProtocol {
         teamTbl.dataSource = self
         teamTbl.delegate = self
         
-        if let teamKey = teamKey {  // Use the passed teamKey
+        if let teamKey = teamKey {
             presenter = TeamsDetailsPresenter(teamKey: teamKey)
-            presenter?.apiManager = APIManager.shared  // Ensure APIManager is set if needed
-            presenter?.view = self  // Set the view to update the UI
+            presenter?.apiManager = APIManager.shared
+            presenter?.view = self 
             presenter?.fetchTeamDetails()
         } else {
             print("Team key is missing.")
@@ -37,7 +37,7 @@ class TeamDetailsViewController: UIViewController, TeamDetailsViewProtocol {
         tittle.text = presenter?.team?.teamName ?? ""
         tittle.textColor = .white
         
-        coachName.text = "Coache: " + (presenter?.team?.coaches.first!.coachName)!
+        coachName.text = "Coach: " + (presenter?.team?.coaches.first!.coachName)!
         if let teamLogoUrl = URL(string: presenter?.team?.teamLogo ?? "") {
             TeamImg.kf.setImage(with: teamLogoUrl)
         }

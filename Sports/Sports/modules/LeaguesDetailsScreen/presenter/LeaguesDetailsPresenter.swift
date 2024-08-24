@@ -89,7 +89,11 @@ class LeaguesDetailsPresenter {
     func isLeagueFavorite(_ league: LeaguesResult) -> Bool {
         return ((coreDataManager.isLeagueFavorite(leagueKey: league.leagueKey)) != nil)
     }
-
+    func fetchFavoriteState() {
+        guard let selectedLeague = selectedLeague else { return }
+        let isFavorite = isLeagueFavorite(selectedLeague)
+        view?.updateFavoriteStatus(isFavorite: isFavorite)
+    }
     func saveFavorite(_ league: LeaguesResult) {
         coreDataManager.saveFavorite(league: league)
     }

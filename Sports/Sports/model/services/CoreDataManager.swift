@@ -57,4 +57,7 @@ class CoreDataManager {
             print("Failed deleting: \(error.localizedDescription)")
         }
     }
+   
+
+    
 }

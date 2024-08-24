@@ -13,10 +13,11 @@ class playersTableViewCell: UITableViewCell {
     @IBOutlet weak var playerImg: UIImageView!
 
     override func awakeFromNib() {
-        playerImg.layer.cornerRadius = playerImg.frame.width / 2
 
         super.awakeFromNib()
-       
+
+        playerImg.clipsToBounds = true
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

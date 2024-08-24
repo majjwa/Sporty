@@ -2,12 +2,14 @@ import UIKit
 
 protocol LeaguesDetailsProtocol: AnyObject {
     func updateCollectionView()
+    func updateFavoriteStatus(isFavorite: Bool)
 }
 
 class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
 
     @IBOutlet weak var DetailsCollectionView: UICollectionView!
     @IBOutlet weak var favBtn: UIButton!
+    
     var presenter: LeaguesDetailsPresenter?
     var leagueId: Int?
     var selectedLeague: LeaguesResult?
@@ -28,7 +30,7 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
         if let leagueId = leagueId {
             presenter?.fetchUpComing(leagueId: leagueId)
             presenter?.fetchLatest(leagueId: leagueId)
-            updateFavoriteStatus()
+            presenter?.fetchFavoriteState()
         }
     }
 
@@ -38,6 +40,12 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
 
     func updateCollectionView() {
         DetailsCollectionView.reloadData()
+    }
+
+    func updateFavoriteStatus(isFavorite: Bool) {
+        self.isFavorite = isFavorite
+        let imageName = isFavorite ? "heart.fill" : "heart"
+        favBtn.setImage(UIImage(systemName: imageName), for: .normal)
     }
 
     func setupCompositionalLayout() {
@@ -69,14 +77,6 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
             self.present(alert, animated: true, completion: nil)
         }
     }
-
-    func updateFavoriteStatus() {
-        guard let league = selectedLeague else { return }
-        isFavorite = presenter?.isLeagueFavorite(league) ?? false
-        let imageName = isFavorite ? "heart.fill" : "heart"
-        favBtn.setImage(UIImage(systemName: imageName), for: .normal)
-    }
-
 
     func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
