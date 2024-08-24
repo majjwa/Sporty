@@ -31,14 +31,12 @@ extension LeaguesDetailsViewController: UICollectionViewDelegate, UICollectionVi
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fisrtCollectionViewCell", for: indexPath) as! fisrtCollectionViewCell
             let event = presenter?.upComingEvents[indexPath.row]
-            
-            cell.leagueName.text = presenter?.selectedLeague?.leagueName
             cell.team1Name.text = event?.eventHomeTeam
             cell.team2Name.text = event?.eventAwayTeam
             cell.date.text = event?.eventDate
             cell.time.text = event?.eventTime
-            cell.team1state.text = event?.eventFinalResult
-            cell.team2state.text = event?.eventFinalResult
+//            cell.team1state.text = event?.eventFinalResult
+//            cell.team2state.text = event?.eventFinalResult
 
             if let team1LogoUrl = event?.homeTeamLogo {
                 cell.team1Img.kf.setImage(with: URL(string: team1LogoUrl))

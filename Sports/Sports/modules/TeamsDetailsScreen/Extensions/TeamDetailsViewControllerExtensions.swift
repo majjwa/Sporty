@@ -33,7 +33,13 @@ extension TeamDetailsViewController: UITableViewDataSource, UITableViewDelegate 
         // Get the player data
         if let player = presenter?.team?.players[indexPath.row] {
             cell.playerName.text = player.playerName
-            cell.playerImg.image = UIImage(named: "player")
+            if player.playerImage != nil {
+                let url = URL(string: player.playerImage!)
+                cell.playerImg.kf.setImage(with: url)
+            }else {
+                cell.playerImg.image = UIImage(named: "player")
+
+            }
             cell.playerImg.layer.cornerRadius = 10
             cell.playerImg.clipsToBounds = true
             

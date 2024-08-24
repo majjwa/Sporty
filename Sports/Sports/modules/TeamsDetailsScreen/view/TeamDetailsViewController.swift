@@ -37,7 +37,7 @@ class TeamDetailsViewController: UIViewController, TeamDetailsViewProtocol {
         tittle.text = presenter?.team?.teamName ?? ""
         tittle.textColor = .white
         
-        coachName.text = presenter?.team?.coaches.first?.coachName ?? ""
+        coachName.text = "Coache: " + (presenter?.team?.coaches.first!.coachName)!
         if let teamLogoUrl = URL(string: presenter?.team?.teamLogo ?? "") {
             TeamImg.kf.setImage(with: teamLogoUrl)
         }

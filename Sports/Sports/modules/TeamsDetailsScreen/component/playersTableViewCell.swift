@@ -11,7 +11,10 @@ class playersTableViewCell: UITableViewCell {
 
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var playerImg: UIImageView!
+
     override func awakeFromNib() {
+        playerImg.layer.cornerRadius = playerImg.frame.width / 2
+
         super.awakeFromNib()
        
     }
