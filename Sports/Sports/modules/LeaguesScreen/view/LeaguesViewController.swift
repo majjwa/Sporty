@@ -47,10 +47,6 @@ class LeaguesViewController: UIViewController, LeaguesProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
-
-        if isFavoritesMode {
-            updateTabBarSelection()
-        }
     }
 
     private func setupUI() {
@@ -84,23 +80,10 @@ class LeaguesViewController: UIViewController, LeaguesProtocol {
     }
 
     private func setupFavoritesMode() {
-        // Customize tab bar for Favorites mode
-        favImg?.tintColor = .green
-        homeImg?.tintColor = .white
-        
-        // Load favorite leagues
         presenter?.fetchFavoriteLeagues()
     }
 
-    private func updateTabBarSelection() {
-        favImg?.tintColor = .green
-        homeImg?.tintColor = .white
-    }
+   
 
-    @IBAction func homeButtonTapped(_ sender: UIButton) {
-        homeImg?.tintColor = .green
-        favImg?.tintColor = .white
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+  
 }

@@ -33,6 +33,7 @@ class LeaguesDetailsPresenter {
             case .success(let response):
                 self.upComingEvents = response.result
                 self.processTeamData(from: response.result)
+                self.checkFavoriteStatus()
                 self.view?.updateCollectionView()
             case .failure(let error):
                 print("Failed to fetch upcoming events: \(error)")
@@ -57,6 +58,7 @@ class LeaguesDetailsPresenter {
             case .success(let response):
                 self.latestEvents = response.result
                 self.processTeamData(from: response.result)
+                self.checkFavoriteStatus()
                 self.view?.updateCollectionView()
             case .failure(let error):
                 print("Failed to fetch latest events: \(error)")
@@ -77,27 +79,20 @@ class LeaguesDetailsPresenter {
         teams = Array(teamSet)
     }
 
-    func isLeagueFavorite(_ league: LeaguesResult) -> Bool {
-        return coreDataManager.isLeagueFavorite(leagueKey: league.leagueKey)
-    }
-
-    func fetchFavoriteState() {
-        guard let league = selectedLeague else {
-            print("No selected league to check for favorites")
-            return
-        }
-        
-        let isFavorite = coreDataManager.isLeagueFavorite(leagueKey: league.leagueKey)
+     func checkFavoriteStatus() {
+        guard let league = selectedLeague else { return }
+        let isFavorite = upComingEvents.contains(where: { $0.eventKey == league.leagueKey }) ||
+                         latestEvents.contains(where: {  $0.eventKey == league.leagueKey })
         view?.updateFavoriteStatus(isFavorite: isFavorite)
     }
 
     func saveFavorite(_ league: LeaguesResult) {
         coreDataManager.saveFavorite(league: league)
-        fetchFavoriteState()
+        checkFavoriteStatus() // Re-check the favorite status
     }
 
-    func deleteFavorite(_ league: LeaguesResult) {
-        coreDataManager.deleteFavorite(leagueKey: league.leagueKey)
-        fetchFavoriteState()
+    func deleteFavorite(leagueId: Int) {
+        coreDataManager.deleteFavorite(leagueKey: leagueId)
+        checkFavoriteStatus() // Re-check the favorite status
     }
 }

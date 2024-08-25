@@ -1,56 +1,68 @@
 import UIKit
 import Kingfisher
+import Alamofire
 
 protocol LeaguesDetailsProtocol: AnyObject {
     func updateCollectionView()
     func updateFavoriteStatus(isFavorite: Bool)
+    func showOfflineAlert()
 }
 
 class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
-    
+
     @IBOutlet weak var detailsCollectionView: UICollectionView!
     @IBOutlet weak var favBtn: UIButton!
-    
+
     var presenter: LeaguesDetailsPresenter?
     var leagueId: Int?
     var selectedLeague: LeaguesResult?
     var isFavorite: Bool = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         setupCompositionalLayout()
-        loadData()
+        checkNetworkStatusAndLoadData()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.fetchFavoriteState()
+        // Check network status and update favorite status
+        checkNetworkStatusAndLoadData()
     }
-    
+
     @IBAction func dismiss(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     @IBAction func favBtnTapped(_ sender: UIButton) {
         toggleFavoriteStatus()
     }
-    
+
     func updateCollectionView() {
         DispatchQueue.main.async {
             self.detailsCollectionView.reloadData()
         }
     }
-    
+
     func updateFavoriteStatus(isFavorite: Bool) {
         DispatchQueue.main.async {
-            print("Updating favorite status: \(isFavorite)")
             self.isFavorite = isFavorite
             let imageName = isFavorite ? "heart.fill" : "heart"
             self.favBtn.setImage(UIImage(systemName: imageName), for: .normal)
         }
     }
-    
+
+    func showOfflineAlert() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "No Internet Connection", message: "Please check your network settings and try again.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+                self?.dismiss(animated: true, completion: nil)
+            })
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
     private func setupCollectionView() {
         detailsCollectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
         detailsCollectionView.register(UINib(nibName: "fisrtCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "fisrtCollectionViewCell")
@@ -59,48 +71,56 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
         detailsCollectionView.dataSource = self
         detailsCollectionView.delegate = self
     }
-    
+
     private func setupCompositionalLayout() {
         detailsCollectionView.collectionViewLayout = createCompositionalLayout()
     }
-    
-    private func loadData() {
+
+    private func checkNetworkStatusAndLoadData() {
         guard let leagueId = leagueId else {
             print("No league ID")
             return
         }
         
-        presenter?.fetchUpComing(leagueId: leagueId)
-        presenter?.fetchLatest(leagueId: leagueId)
-        presenter?.fetchFavoriteState()
+        if Connectivity.shared.isReachable {
+            // Show collection view and register header view
+            detailsCollectionView.isHidden = false
+            setupCollectionView()
+            presenter?.fetchUpComing(leagueId: leagueId)
+            presenter?.fetchLatest(leagueId: leagueId)
+        } else {
+            // Hide collection view and header view
+            detailsCollectionView.isHidden = true
+            showOfflineAlert()
+        }
     }
-    
+
     private func toggleFavoriteStatus() {
-        guard let league = selectedLeague else {
+        guard let leagueId = leagueId, let league = selectedLeague else {
             print("No selected league")
             return
         }
-        
+
         isFavorite.toggle()
         let imageName = isFavorite ? "heart.fill" : "heart"
         favBtn.setImage(UIImage(systemName: imageName), for: .normal)
-        
+
         if isFavorite {
             presenter?.saveFavorite(league)
         } else {
-            showDeleteConfirmation(for: league)
+            showDeleteConfirmation(for: leagueId)
         }
     }
-    
-    private func showDeleteConfirmation(for league: LeaguesResult) {
+
+    private func showDeleteConfirmation(for leagueId: Int) {
         let alert = UIAlertController(title: "Are you sure you want to delete?", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .destructive) { [weak self] _ in
-            self?.presenter?.deleteFavorite(league)
+            self?.presenter?.deleteFavorite(leagueId: leagueId)
         })
         alert.addAction(UIAlertAction(title: "No", style: .cancel))
         present(alert, animated: true)
     }
-    
+
     private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             switch sectionIndex {

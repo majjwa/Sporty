@@ -88,6 +88,11 @@
                                     <constraint firstItem="Rem-QT-M34" firstAttribute="leading" secondItem="LlD-MC-NbY" secondAttribute="leading" constant="15" id="zdd-Q9-p7R"/>
                                 </constraints>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carat.png" id="QBn-ad-BDQ">
+                                <rect key="frame" x="0.0" y="108" width="393" height="636"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9rr-Vt-G2b">
                                 <rect key="frame" x="0.0" y="135" width="393" height="636"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -142,6 +147,8 @@
                             <constraint firstItem="9rr-Vt-G2b" firstAttribute="bottom" secondItem="VMX-8X-HBW" secondAttribute="bottom" constant="-47" id="4wn-Pp-htL"/>
                             <constraint firstItem="9rr-Vt-G2b" firstAttribute="top" secondItem="VMX-8X-HBW" secondAttribute="top" constant="32" id="6JV-7q-6hj"/>
                             <constraint firstItem="9rr-Vt-G2b" firstAttribute="centerX" secondItem="LlD-MC-NbY" secondAttribute="centerX" id="C60-yZ-YPO"/>
+                            <constraint firstItem="QBn-ad-BDQ" firstAttribute="height" secondItem="9rr-Vt-G2b" secondAttribute="height" id="HqY-eY-WJo"/>
+                            <constraint firstItem="QBn-ad-BDQ" firstAttribute="width" secondItem="9rr-Vt-G2b" secondAttribute="width" id="VQC-Wk-BLZ"/>
                             <constraint firstItem="VMX-8X-HBW" firstAttribute="bottom" secondItem="LlD-MC-NbY" secondAttribute="bottom" constant="-15" id="e0Y-yg-Fpv"/>
                             <constraint firstItem="LlD-MC-NbY" firstAttribute="height" secondItem="0hT-qH-WF9" secondAttribute="height" multiplier="0.0751174" id="eng-Sw-BJa"/>
                             <constraint firstItem="VMX-8X-HBW" firstAttribute="trailing" secondItem="LlD-MC-NbY" secondAttribute="trailing" constant="55" id="guJ-EM-9x1"/>
@@ -151,6 +158,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Sports" id="6EW-8o-sIF"/>
                     <connections>
+                        <outlet property="DefaultImg" destination="QBn-ad-BDQ" id="ufk-AE-YNB"/>
                         <outlet property="favImg" destination="pae-Ib-bya" id="GaE-6i-vBp"/>
                         <outlet property="favTabBar" destination="5a0-0G-hW5" id="DTk-5S-lg9"/>
                         <outlet property="homeCollectionView" destination="9rr-Vt-G2b" id="LJG-rj-3rV"/>
@@ -275,7 +283,7 @@
                                     <color key="baseForegroundColor" systemColor="systemGreenColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="favBtnTapped:" destination="dfi-AM-AWP" eventType="touchUpInside" id="Gr8-xC-502"/>
+                                    <action selector="favBtnTapped:" destination="dfi-AM-AWP" eventType="touchUpInside" id="hN1-pH-Dru"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -293,8 +301,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="DetailsCollectionView" destination="RWo-3I-ygJ" id="MwA-1o-snK"/>
-                        <outlet property="favBtn" destination="K6G-hr-zvV" id="KuT-jU-Hei"/>
+                        <outlet property="detailsCollectionView" destination="RWo-3I-ygJ" id="nF2-dS-9yb"/>
+                        <outlet property="favBtn" destination="K6G-hr-zvV" id="aCl-4A-LLa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPE-Sm-7Wb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -425,11 +433,12 @@
     <resources>
         <image name="Ball" width="1024" height="1024"/>
         <image name="arrowshape.backward.circle" catalog="system" width="128" height="123"/>
+        <image name="carat.png" width="16" height="28"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

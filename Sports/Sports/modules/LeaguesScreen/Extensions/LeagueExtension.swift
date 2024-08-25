@@ -70,20 +70,29 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
             selectedLeague = presenter?.leagues[indexPath.row]
         }
         
-        let leagueId = selectedLeague?.leagueKey
-        let defaultCoreDataManager = CoreDataManager(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+        guard let leagueId = selectedLeague?.leagueKey else {
+            print("Error: League ID not found.")
+            return
+        }
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let defaultCoreDataManager = CoreDataManager(context: context)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let leaguesDetailsVC = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController {
             leaguesDetailsVC.leagueId = leagueId
             leaguesDetailsVC.selectedLeague = selectedLeague
-            let presenter = LeaguesDetailsPresenter(view: leaguesDetailsVC, apiManager: APIManager.shared, coreDataManager: leaguesDetailsVC.presenter?.coreDataManager ?? defaultCoreDataManager)
+            
+            let presenter = LeaguesDetailsPresenter(view: leaguesDetailsVC,
+                                                    apiManager: APIManager.shared,
+                                                    coreDataManager: defaultCoreDataManager)
             leaguesDetailsVC.presenter = presenter
             
             leaguesDetailsVC.modalPresentationStyle = .fullScreen
             self.present(leaguesDetailsVC, animated: true, completion: nil)
         }
     }
+
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
