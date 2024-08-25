@@ -14,7 +14,6 @@ protocol LeaguesDetailsProtocol: AnyObject {
     func showOfflineAlert()
 }
 
-
 class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
 
     @IBOutlet weak var detailsCollectionView: UICollectionView!
@@ -24,7 +23,7 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
     var presenter: LeaguesDetailsPresenter?
     var leagueId: Int?
     var selectedLeague: LeaguesResult?
-    var isFavorite: Bool = false
+    private var isFavorite: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +34,8 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateFavoriteStatus(isFavorite: presenter?.coreDataManager.isLeagueFavorite(leagueKey: leagueId ?? 0) ?? false)
         checkNetworkStatusAndLoadData()
-        updateFavoriteStatus(isFavorite: isFavorite)
     }
 
     @IBAction func dismiss(_ sender: UIButton) {
@@ -52,10 +51,13 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
             let hasData = self.presenter?.upComingEvents.isEmpty == false ||
                           self.presenter?.latestEvents.isEmpty == false ||
                           self.presenter?.teams.isEmpty == false
-            
+
             self.defaultImg.isHidden = hasData
             self.detailsCollectionView.isHidden = !hasData
-            self.detailsCollectionView.reloadData()
+
+            if hasData {
+                self.detailsCollectionView.reloadData()
+            }
         }
     }
 
@@ -95,11 +97,10 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
             print("No league ID")
             return
         }
-        
+
         if Connectivity.shared.isReachable {
             detailsCollectionView.isHidden = false
             defaultImg.isHidden = true
-            setupCollectionView()
             presenter?.fetchUpComing(leagueId: leagueId)
             presenter?.fetchLatest(leagueId: leagueId)
             presenter?.checkFavoriteStatus()

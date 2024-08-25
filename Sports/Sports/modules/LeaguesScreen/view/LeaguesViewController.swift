@@ -8,9 +8,10 @@
 import UIKit
 import Kingfisher
 
-protocol LeaguesProtocol{
+protocol LeaguesProtocol {
     func updateTable()
 }
+
 class LeaguesViewController: UIViewController, LeaguesProtocol {
 
     @IBOutlet weak var leaguesTableView: UITableView!
@@ -41,7 +42,6 @@ class LeaguesViewController: UIViewController, LeaguesProtocol {
         leaguesTableView.refreshControl = refreshControl
     }
 
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
@@ -50,8 +50,8 @@ class LeaguesViewController: UIViewController, LeaguesProtocol {
     func setupUI() {
         view.backgroundColor = .black
         leaguesTableView.tableFooterView = UIView()
-        deafultImg.isHidden = true  }
-
+        deafultImg.isHidden = true
+    }
 
     private func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = .green
@@ -67,23 +67,20 @@ class LeaguesViewController: UIViewController, LeaguesProtocol {
             presenter?.fetchFavoriteLeagues()
         }
     }
-    func updateTable() {
-        leaguesTableView.reloadData()
-        leaguesTableView.refreshControl?.endRefreshing()
 
-        if isFavoritesMode && (presenter?.coreDataManager?.fetchFavoriteLeagues().count ?? 0) == 0 {
-            deafultImg.isHidden = false
-        } else {
-            deafultImg.isHidden = true
+    func updateTable() {
+        DispatchQueue.main.async {
+            self.leaguesTableView.reloadData()
+            self.leaguesTableView.refreshControl?.endRefreshing()
+            if self.isFavoritesMode && (self.presenter?.coreDataManager?.fetchFavoriteLeagues().count ?? 0) == 0 {
+                self.deafultImg.isHidden = false
+            } else {
+                self.deafultImg.isHidden = true
+            }
         }
     }
-
 
     private func setupFavoritesMode() {
         presenter?.fetchFavoriteLeagues()
     }
-
-   
-
-  
 }
