@@ -10,7 +10,6 @@ import UIKit
 class HeaderView: UICollectionReusableView {
     let titleLabel: UILabel = {
         let label = UILabel()
-       
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false

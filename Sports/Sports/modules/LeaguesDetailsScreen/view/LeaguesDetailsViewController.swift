@@ -8,10 +8,12 @@ protocol LeaguesDetailsProtocol: AnyObject {
     func showOfflineAlert()
 }
 
+
 class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
 
     @IBOutlet weak var detailsCollectionView: UICollectionView!
     @IBOutlet weak var favBtn: UIButton!
+    @IBOutlet weak var defaultImg: UIImageView!
 
     var presenter: LeaguesDetailsPresenter?
     var leagueId: Int?
@@ -28,6 +30,7 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         checkNetworkStatusAndLoadData()
+        updateFavoriteStatus(isFavorite: isFavorite)
     }
 
     @IBAction func dismiss(_ sender: UIButton) {
@@ -40,6 +43,12 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
 
     func updateCollectionView() {
         DispatchQueue.main.async {
+            let hasData = self.presenter?.upComingEvents.isEmpty == false ||
+                          self.presenter?.latestEvents.isEmpty == false ||
+                          self.presenter?.teams.isEmpty == false
+            
+            self.defaultImg.isHidden = hasData
+            self.detailsCollectionView.isHidden = !hasData
             self.detailsCollectionView.reloadData()
         }
     }
@@ -82,14 +91,14 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
         }
         
         if Connectivity.shared.isReachable {
-            // Show collection view
             detailsCollectionView.isHidden = false
+            defaultImg.isHidden = true
             setupCollectionView()
             presenter?.fetchUpComing(leagueId: leagueId)
             presenter?.fetchLatest(leagueId: leagueId)
-            presenter?.checkFavoriteStatus() // Fetch favorite status
+            presenter?.checkFavoriteStatus()
         } else {
-            // Hide collection view
+            defaultImg.isHidden = false
             detailsCollectionView.isHidden = true
             showOfflineAlert()
         }

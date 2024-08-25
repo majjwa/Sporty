@@ -83,12 +83,13 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
             leaguesDetailsVC.leagueId = leagueId
             leaguesDetailsVC.selectedLeague = selectedLeague
             
-            let presenter = LeaguesDetailsPresenter(view: leaguesDetailsVC,
-                                                    apiManager: APIManager.shared,
-                                                    coreDataManager: defaultCoreDataManager)
+            let presenter = LeaguesDetailsPresenter(view: leaguesDetailsVC as! LeaguesDetailsProtocol,
+            apiManager: APIManager.shared,
+           coreDataManager: defaultCoreDataManager)
             leaguesDetailsVC.presenter = presenter
             
             leaguesDetailsVC.modalPresentationStyle = .fullScreen
+            
             self.present(leaguesDetailsVC, animated: true, completion: nil)
         }
     }

@@ -88,11 +88,11 @@ class LeaguesDetailsPresenter {
 
     func saveFavorite(_ league: LeaguesResult) {
         coreDataManager.saveFavorite(league: league)
-        checkFavoriteStatus() // Re-check the favorite status
+        checkFavoriteStatus() 
     }
 
     func deleteFavorite(leagueId: Int) {
         coreDataManager.deleteFavorite(leagueKey: leagueId)
-        checkFavoriteStatus() // Re-check the favorite status
+        checkFavoriteStatus()
     }
 }

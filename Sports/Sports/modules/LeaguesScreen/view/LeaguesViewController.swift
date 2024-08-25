@@ -14,10 +14,7 @@ protocol LeaguesProtocol{
 class LeaguesViewController: UIViewController, LeaguesProtocol {
 
     @IBOutlet weak var leaguesTableView: UITableView!
-    @IBOutlet weak var tabBarView: UIView?
-    @IBOutlet weak var favImg: UIImageView?
-    @IBOutlet weak var homeImg: UIImageView?
-
+    @IBOutlet weak var deafultImg: UIImageView!
     var presenter: LeaguesPresenter?
     var sportType: String?
     var isFavoritesMode = false
@@ -44,20 +41,17 @@ class LeaguesViewController: UIViewController, LeaguesProtocol {
         leaguesTableView.refreshControl = refreshControl
     }
 
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
     }
 
-    private func setupUI() {
+    func setupUI() {
         view.backgroundColor = .black
         leaguesTableView.tableFooterView = UIView()
+        deafultImg.isHidden = true  }
 
-        if isFavoritesMode {
-            tabBarView?.layer.cornerRadius = tabBarView?.frame.height ?? 0 / 2
-            tabBarView?.clipsToBounds = true
-        }
-    }
 
     private func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = .green
@@ -73,11 +67,17 @@ class LeaguesViewController: UIViewController, LeaguesProtocol {
             presenter?.fetchFavoriteLeagues()
         }
     }
-
     func updateTable() {
         leaguesTableView.reloadData()
         leaguesTableView.refreshControl?.endRefreshing()
+
+        if isFavoritesMode && (presenter?.coreDataManager?.fetchFavoriteLeagues().count ?? 0) == 0 {
+            deafultImg.isHidden = false
+        } else {
+            deafultImg.isHidden = true
+        }
     }
+
 
     private func setupFavoritesMode() {
         presenter?.fetchFavoriteLeagues()
