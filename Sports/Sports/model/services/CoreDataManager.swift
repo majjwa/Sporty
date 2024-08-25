@@ -21,10 +21,6 @@ class CoreDataManager {
         }
     }
 
-
-
-
-
     func saveFavorite(league: LeaguesResult) {
         let favoriteObject = FavModel(context: context)
         favoriteObject.leagueKey = Int32(league.leagueKey)

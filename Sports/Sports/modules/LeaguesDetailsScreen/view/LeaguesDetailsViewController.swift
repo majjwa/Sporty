@@ -27,7 +27,6 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Check network status and update favorite status
         checkNetworkStatusAndLoadData()
     }
 
@@ -83,13 +82,14 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
         }
         
         if Connectivity.shared.isReachable {
-            // Show collection view and register header view
+            // Show collection view
             detailsCollectionView.isHidden = false
             setupCollectionView()
             presenter?.fetchUpComing(leagueId: leagueId)
             presenter?.fetchLatest(leagueId: leagueId)
+            presenter?.checkFavoriteStatus() // Fetch favorite status
         } else {
-            // Hide collection view and header view
+            // Hide collection view
             detailsCollectionView.isHidden = true
             showOfflineAlert()
         }

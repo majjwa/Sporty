@@ -1,4 +1,5 @@
 import Foundation
+
 class LeaguesDetailsPresenter {
     var view: LeaguesDetailsProtocol?
     var apiManager: APIManager?
@@ -79,10 +80,9 @@ class LeaguesDetailsPresenter {
         teams = Array(teamSet)
     }
 
-     func checkFavoriteStatus() {
+    func checkFavoriteStatus() {
         guard let league = selectedLeague else { return }
-        let isFavorite = upComingEvents.contains(where: { $0.eventKey == league.leagueKey }) ||
-                         latestEvents.contains(where: {  $0.eventKey == league.leagueKey })
+        let isFavorite = coreDataManager.isLeagueFavorite(leagueKey: league.leagueKey)
         view?.updateFavoriteStatus(isFavorite: isFavorite)
     }
 

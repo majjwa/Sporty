@@ -52,9 +52,9 @@
                                         <rect key="frame" x="157" y="13" width="111" height="43"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pae-Ib-bya">
-                                                <rect key="frame" x="0.0" y="1.6666666666666643" width="111" height="39.000000000000007"/>
+                                                <rect key="frame" x="0.0" y="3.3333333333333321" width="111" height="37"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <imageReference key="image" image="star.fill" catalog="system" symbolScale="small"/>
+                                                <imageReference key="image" image="heart.fill" catalog="system" symbolScale="small"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="56E-Xg-Tpg">
                                                 <rect key="frame" x="43.666666666666657" y="14.666666666666629" width="24" height="14"/>
@@ -435,8 +435,8 @@
         <image name="arrowshape.backward.circle" catalog="system" width="128" height="123"/>
         <image name="carat.png" width="16" height="28"/>
         <image name="heart" catalog="system" width="128" height="107"/>
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
-        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
