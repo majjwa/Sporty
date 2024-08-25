@@ -1,3 +1,9 @@
+//
+//  LeaguesViewController.swift
+//  Sporty
+//
+//  Created by marwa maky on 20/08/2024.
+//
 import UIKit
 import Kingfisher
 
@@ -28,7 +34,6 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
         let league: LeaguesResult?
         
         if isFavoritesMode {
-            // Fetch favorite leagues
             let favoriteLeagues = presenter?.coreDataManager?.fetchFavoriteLeagues() ?? []
             league = favoriteLeagues[indexPath.row]
         } else {
@@ -107,7 +112,6 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
         return footerView
     }
 
-    // Add space between cells
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.contentView.layer.masksToBounds = true
         cell.contentView.layer.cornerRadius = 30
@@ -121,7 +125,6 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
                let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
                    guard let self = self else { return }
                    
-                   // Fetch favorite leagues
                    var favoriteLeagues = self.presenter?.coreDataManager?.fetchFavoriteLeagues() ?? []
                    
                    guard indexPath.row < favoriteLeagues.count else {

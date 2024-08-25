@@ -178,13 +178,6 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		1314FA282C7B54EC004CB679 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		134DA9882C74B58C007444FD /* LeaguesScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,7 +518,6 @@
 		186093072C761EFE00D7100F /* Utilties */ = {
 			isa = PBXGroup;
 			children = (
-				1314FA282C7B54EC004CB679 /* Network */,
 				1314FA272C7B54DD004CB679 /* Helper */,
 				186093082C761F0C00D7100F /* Table&CollectionNibExt */,
 			);

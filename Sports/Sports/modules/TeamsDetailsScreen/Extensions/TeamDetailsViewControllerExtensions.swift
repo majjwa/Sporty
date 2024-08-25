@@ -22,7 +22,6 @@ extension TeamDetailsViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "playersTableViewCell", for: indexPath) as! playersTableViewCell
         
-        // Set selected background color to black
         cell.selectedBackgroundView = {
             let view = UIView()
             view.backgroundColor = .black
@@ -38,7 +37,6 @@ extension TeamDetailsViewController: UITableViewDataSource, UITableViewDelegate 
                 cell.playerImg.image = UIImage(named: "player")
             }
 
-            // Add shadow and corner radius to the cell
             cell.layer.cornerRadius = 10
             cell.layer.shadowColor = UIColor.black.cgColor
             cell.layer.shadowOpacity = 0.1
@@ -60,7 +58,7 @@ extension TeamDetailsViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10 // Space between sections
+        return 10
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -69,7 +67,6 @@ extension TeamDetailsViewController: UITableViewDataSource, UITableViewDelegate 
         return footerView
     }
 
-    // Add space between cells
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.contentView.layer.masksToBounds = true
         cell.contentView.layer.cornerRadius = 30

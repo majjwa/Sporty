@@ -1,3 +1,9 @@
+//
+//  HomeViewController.swift
+//  Sporty
+//
+//  Created by marwa maky on 18/08/2024.
+//
 import UIKit
 import Foundation
 import Alamofire
@@ -73,12 +79,10 @@ class HomeViewController: UIViewController, HomeProtocol {
             print("Network status change detected: Reachable = \(isReachable)")
 
             if isReachable {
-                // Ensure the collection view is visible and data is updated
                 self.homeCollectionView.isHidden = false
                 self.DefaultImg.isHidden = true
                 self.presenter?.fetchData()
             } else {
-                // Only show the default image when there's no network
                 self.homeCollectionView.isHidden = true
                 self.DefaultImg.isHidden = false
                
