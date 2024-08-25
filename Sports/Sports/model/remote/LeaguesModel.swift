@@ -6,12 +6,12 @@
 //
 
 import Foundation
-struct LeaguesModel: Codable {
+public struct LeaguesModel: Codable {
     let success: Int
     let result: [LeaguesResult]
          }
 
-struct LeaguesResult: Codable {
+public struct LeaguesResult: Codable {
     let leagueKey: Int
     let leagueName: String
     let leagueLogo: String?

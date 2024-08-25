@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct TeamResponse: Decodable {
+public struct TeamResponse: Decodable {
     let success: Int
     let result: [Team]
 }
 
-struct Team: Hashable, Decodable {
+ public struct Team: Hashable, Decodable {
     let teamKey: Int
     let teamName: String
     let teamLogo: String
@@ -28,16 +28,16 @@ struct Team: Hashable, Decodable {
         case coaches = "coaches"
     }
 
-    func hash(into hasher: inout Hasher) {
+     public func hash(into hasher: inout Hasher) {
         hasher.combine(teamKey)
     }
     
-    static func ==(lhs: Team, rhs: Team) -> Bool {
+     public static func ==(lhs: Team, rhs: Team) -> Bool {
         return lhs.teamKey == rhs.teamKey
     }
 }
 
-struct Player: Decodable {
+public struct Player: Decodable {
     let playerName: String
     let playerImage: String?
 

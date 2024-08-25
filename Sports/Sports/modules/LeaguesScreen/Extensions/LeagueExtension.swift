@@ -18,7 +18,6 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeaguesTableViewCell", for: indexPath) as! LeaguesTableViewCell
         
-        // Set selected background color to black
         cell.selectedBackgroundView = {
             let view = UIView()
             view.backgroundColor = .black
@@ -33,7 +32,7 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
             let favoriteLeagues = presenter?.coreDataManager?.fetchFavoriteLeagues() ?? []
             league = favoriteLeagues[indexPath.row]
         } else {
-            // Display regular leagues
+            
             league = presenter?.leagues[indexPath.row]
         }
         
