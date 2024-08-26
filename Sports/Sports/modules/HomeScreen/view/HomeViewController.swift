@@ -6,7 +6,7 @@
 //
 import UIKit
 import Foundation
-import Alamofire
+
 
 protocol HomeProtocol {
     func updateCellData()
@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, HomeProtocol {
 
     @IBOutlet weak var DefaultImg: UIImageView!
     @IBOutlet weak var homeCollectionView: UICollectionView!
+    //Custom TabBar Outlets
     @IBOutlet weak var favImg: UIImageView!
     @IBOutlet weak var homeImg: UIImageView!
     @IBOutlet weak var favTabBar: UIView!
@@ -25,29 +26,29 @@ class HomeViewController: UIViewController, HomeProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.DefaultImg.image = UIImage(named: "connection")
-        self.DefaultImg.isHidden = true
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
         presenter = HomePresenter(homeView: self)
+        self.DefaultImg.image = UIImage(named: "connection")
+        self.DefaultImg.isHidden = true
         homeDesign()
-        
-        let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .green
-        refreshControl.addTarget(self, action: #selector(refreshDataIndicator(_:)), for: .valueChanged)
-        homeCollectionView.refreshControl = refreshControl
-        
+        setUpRefrechControl()
         NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusChange(_:)), name: .networkStatusChanged, object: nil)
         handleNetworkStatusChange()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         homeImg.tintColor = .green
         favImg.tintColor = .white
-        handleNetworkStatusChange()
+       
     }
-
+    func setUpRefrechControl(){
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .green
+        refreshControl.addTarget(self, action: #selector(refreshDataIndicator(_:)), for: .valueChanged)
+        homeCollectionView.refreshControl = refreshControl
+    }
     @IBAction func favTabBarTapped(_ sender: UIButton) {
         homeImg.tintColor = .white
         favImg.tintColor = .green
@@ -68,16 +69,14 @@ class HomeViewController: UIViewController, HomeProtocol {
         homeCollectionView.refreshControl?.endRefreshing()
     }
 
-    @objc private func refreshDataIndicator(_ sender: UIRefreshControl) {
-        handleNetworkStatusChange()
+    @objc func refreshDataIndicator(_ sender: UIRefreshControl) {
         sender.endRefreshing()
     }
     
-    @objc private func handleNetworkStatusChange(_ notification: Notification? = nil) {
+    @objc func handleNetworkStatusChange(_ notification: Notification? = nil) {
         DispatchQueue.main.async {
             let isReachable = Connectivity.shared.isReachable
             print("Network status change detected: Reachable = \(isReachable)")
-
             if isReachable {
                 self.homeCollectionView.isHidden = false
                 self.DefaultImg.isHidden = true
@@ -85,8 +84,7 @@ class HomeViewController: UIViewController, HomeProtocol {
             } else {
                 self.homeCollectionView.isHidden = true
                 self.DefaultImg.isHidden = false
-               
-
+    
             }
 
             self.view.layoutIfNeeded()

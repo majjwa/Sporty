@@ -22,6 +22,8 @@ class LeaguesViewController: UIViewController, LeaguesProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.deafultImg.image = UIImage(named: "no data")
+
         setupUI()
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let coreDataManager = CoreDataManager(context: context)

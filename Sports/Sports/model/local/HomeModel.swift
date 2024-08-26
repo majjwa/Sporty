@@ -6,10 +6,10 @@
 //
 
 import Foundation
-struct HomeModel{
-    
+
+ struct HomeModel{
     let image: String
     let title: String
     
-}
+    }
 

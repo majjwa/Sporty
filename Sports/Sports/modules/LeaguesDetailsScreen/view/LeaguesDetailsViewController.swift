@@ -31,6 +31,7 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
         setupCollectionView()
         setupCompositionalLayout()
         checkNetworkStatusAndLoadData()
+        self.defaultImg.image = UIImage(named: "no data")
 
     }
 
