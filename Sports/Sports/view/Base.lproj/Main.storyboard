@@ -314,7 +314,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="defaultImg" destination="5GP-GO-nqX" id="ETc-Pj-aug"/>
+                        <outlet property="defaultImg" destination="5GP-GO-nqX" id="hZe-Cc-YGA"/>
                         <outlet property="detailsCollectionView" destination="RWo-3I-ygJ" id="nF2-dS-9yb"/>
                         <outlet property="favBtn" destination="K6G-hr-zvV" id="aCl-4A-LLa"/>
                     </connections>
@@ -453,7 +453,7 @@
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="no data" width="2000" height="2000"/>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

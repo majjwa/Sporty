@@ -204,20 +204,36 @@ extension LeaguesDetailsViewController: UICollectionViewDelegate, UICollectionVi
         guard kind == UICollectionView.elementKindSectionHeader else {
             fatalError("Unexpected element kind")
         }
-
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! HeaderView
-        
-        switch indexPath.section {
-        case 0:
-            headerView.titleLabel.text = "Upcoming Events"
-        case 1:
-            headerView.titleLabel.text = "Latest Events"
-        case 2:
-            headerView.titleLabel.text = "Teams"
-        default:
-            headerView.titleLabel.text = ""
+        if(defaultImg.isHidden){
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! HeaderView
+            
+            switch indexPath.section {
+            case 0:
+                headerView.titleLabel.text = "Upcoming Events"
+            case 1:
+                headerView.titleLabel.text = "Latest Events"
+            case 2:
+                headerView.titleLabel.text = "Teams"
+            default:
+                headerView.titleLabel.text = ""
+            }
+            
+            return headerView
         }
-        
-        return headerView
-    }
+        else{
+            let headerView2 = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! HeaderView
+            
+            switch indexPath.section {
+            case 0:
+                headerView2.titleLabel.text = ""
+            case 1:
+                headerView2.titleLabel.text = ""
+            case 2:
+                headerView2.titleLabel.text = ""
+            default:
+                headerView2.titleLabel.text = ""
+            }
+            
+            return headerView2
+        }}
 }

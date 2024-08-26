@@ -4,6 +4,7 @@
 //
 //  Created by marwa maky on 22/08/2024.
 //
+
 import UIKit
 import Kingfisher
 import Alamofire
@@ -24,18 +25,18 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
     var leagueId: Int?
     var selectedLeague: LeaguesResult?
     private var isFavorite: Bool = false
-
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         setupCompositionalLayout()
         checkNetworkStatusAndLoadData()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateFavoriteStatus(isFavorite: presenter?.coreDataManager.isLeagueFavorite(leagueKey: leagueId ?? 0) ?? false)
-        checkNetworkStatusAndLoadData()
     }
 
     @IBAction func dismiss(_ sender: UIButton) {
@@ -99,14 +100,10 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
         }
 
         if Connectivity.shared.isReachable {
-            detailsCollectionView.isHidden = false
-            defaultImg.isHidden = true
             presenter?.fetchUpComing(leagueId: leagueId)
             presenter?.fetchLatest(leagueId: leagueId)
             presenter?.checkFavoriteStatus()
         } else {
-            defaultImg.isHidden = false
-            detailsCollectionView.isHidden = true
             showOfflineAlert()
         }
     }
@@ -151,4 +148,5 @@ class LeaguesDetailsViewController: UIViewController, LeaguesDetailsProtocol {
             }
         }
     }
+    
 }
