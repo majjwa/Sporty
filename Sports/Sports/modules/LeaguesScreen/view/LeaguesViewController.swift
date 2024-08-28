@@ -47,6 +47,7 @@ class LeaguesViewController: UIViewController, LeaguesProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
+        leaguesTableView.reloadData()
     }
 
     func setupUI() {

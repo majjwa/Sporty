@@ -3,9 +3,6 @@
 //
 //  Created by marwa maky on 21/08/2024.
 //
-
-
-
 import Foundation
 
 public struct TeamResponse: Decodable {
